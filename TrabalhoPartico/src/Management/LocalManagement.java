@@ -8,6 +8,7 @@ package Management;
 import Locals.Connectors;
 import Locals.Local;
 import Locals.Portal;
+import Player.ConnectorIteraction;
 import network.Network;
 
 /**
@@ -34,5 +35,12 @@ public class LocalManagement<T> {
         map.removeVertex(connector);
     }
 
+    public void addConnectorIteraction(ConnectorIteraction iteraction) {
+
+    }
+
+    public void removeConnectorIteraction(ConnectorIteraction iteraction) {
+
+    }
 
 }
