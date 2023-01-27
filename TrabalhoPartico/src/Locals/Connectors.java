@@ -6,6 +6,7 @@
 package Locals;
 
 import Player.ConnectorIteraction;
+import java.util.Arrays;
 
 /**
  *
@@ -32,9 +33,13 @@ public class Connectors extends Local {
         this.iteractions = iteractions;
     }
 
+    public void setIteraction(ConnectorIteraction iteraction) {
+        this.iteractions[iteractions.length] = iteraction;
+    }
+
     @Override
     public String toString() {
-        return "Connectors{" + "cooldown=" + cooldown + ", iteractions=" + iteractions + '}';
+        return "Connectors{" + "cooldown=" + cooldown + ", iteractions=" + Arrays.toString(iteractions) + '}';
     }
 
 }

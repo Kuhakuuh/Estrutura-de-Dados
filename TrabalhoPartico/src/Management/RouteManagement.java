@@ -5,17 +5,27 @@
  */
 package Management;
 
+import Locals.Local;
+import network.Network;
+
 /**
  *
  * @author Tiago Lopes
  */
-public class RouteManagement {
+public class RouteManagement<T> {
 
-    public void addRoute() {
+    Network<Local> map = new Network<>();
 
+    public RouteManagement(Network map) {
+        this.map = map;
     }
 
-    public void removeRoute() {
+    public void addRoute(Local local1, Local local2, double weight) {
+        map.addEdge(local1, local2, weight);
+    }
+
+    public void removeRoute(Local local1, Local local2) {
+        map.removeEdge(local1, local2);
 
     }
 
