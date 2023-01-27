@@ -14,6 +14,7 @@ import network.Network;
 /**
  *
  * @author Tiago Lopes
+ * @param <T>
  */
 public class LocalManagement<T> {
 
@@ -27,12 +28,20 @@ public class LocalManagement<T> {
         map.removeVertex(portal);
     }
 
+    public void editPortal() {
+
+    }
+
     public void addConnector(Connectors connector) {
         map.addVertex(connector);
     }
 
     public void removeConnector(Connectors connector) {
         map.removeVertex(connector);
+    }
+
+    public void editConnector() {
+
     }
 
     public void addConnectorIteraction(ConnectorIteraction iteraction) {
@@ -43,4 +52,19 @@ public class LocalManagement<T> {
 
     }
 
+    public void listPortals() {
+
+    }
+
+    public void listConnectors() {
+
+    }
+
+    public void importJson() {
+
+    }
+
+    public void exportJson() {
+
+    }
 }
