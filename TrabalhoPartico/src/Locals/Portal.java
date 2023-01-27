@@ -14,6 +14,7 @@ import Player.Player;
  */
 public class Portal extends Local {
 
+    private String nome;
     private Estado estado;
     private Player jogador;
 
@@ -33,4 +34,18 @@ public class Portal extends Local {
         this.jogador = jogador;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Portal{" + "nome=" + nome + ", estado=" + estado + ", jogador=" + jogador + '}';
+    }
+
+    
 }

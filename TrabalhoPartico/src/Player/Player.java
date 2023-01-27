@@ -57,6 +57,11 @@ public class Player {
     public void setExperience(double experience) {
         this.experience = experience;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" + "name=" + name + ", equipa=" + equipa + ", energy=" + energy + ", level=" + level + ", experience=" + experience + '}';
+    }
     
     
     

@@ -49,4 +49,9 @@ public abstract class Local {
         this.energyAmount = energyAmount;
     }
 
+    @Override
+    public String toString() {
+        return "Local{" + "id=" + id + ", longitude=" + longitude + ", latitude=" + latitude + ", energyAmount=" + energyAmount + '}';
+    }
+
 }

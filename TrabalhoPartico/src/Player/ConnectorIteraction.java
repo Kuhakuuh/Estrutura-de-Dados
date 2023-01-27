@@ -32,4 +32,9 @@ public class ConnectorIteraction {
         this.lastIteraction = lastIteraction;
     }
 
+    @Override
+    public String toString() {
+        return "ConnectorIteraction{" + "player=" + player + ", lastIteraction=" + lastIteraction + '}';
+    }
+
 }

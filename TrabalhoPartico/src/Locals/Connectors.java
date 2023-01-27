@@ -32,4 +32,9 @@ public class Connectors extends Local {
         this.iteractions = iteractions;
     }
 
+    @Override
+    public String toString() {
+        return "Connectors{" + "cooldown=" + cooldown + ", iteractions=" + iteractions + '}';
+    }
+
 }
