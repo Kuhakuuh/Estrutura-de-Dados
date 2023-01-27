@@ -15,7 +15,9 @@ public class TrabalhoPartico {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        CalculateDistance calculate = new CalculateDistance();
+
+        System.out.println(calculate.distance(40.7656918, 40.7697989, -73.9737489, -73.9723702, 0, 0));
     }
-    
+
 }
