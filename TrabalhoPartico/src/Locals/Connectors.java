@@ -6,7 +6,8 @@
 package Locals;
 
 import Player.ConnectorIteraction;
-import java.util.Arrays;
+import arrayunorderedlist.ArrayUnorderedList;
+import arrayunorderedlist.EmptyCollectionException;
 
 /**
  *
@@ -15,7 +16,8 @@ import java.util.Arrays;
 public class Connectors extends Local {
 
     private int cooldown;
-    private ConnectorIteraction[] iteractions;
+    //private ConnectorIteraction[] iteractions;
+    private ArrayUnorderedList<ConnectorIteraction> iteractions = new ArrayUnorderedList<>();
 
     public int getCooldown() {
         return cooldown;
@@ -25,21 +27,26 @@ public class Connectors extends Local {
         this.cooldown = cooldown;
     }
 
-    public ConnectorIteraction[] getIteractions() {
+    public void setIteraction(ConnectorIteraction iteraction) {
+        this.iteractions.addToRear(iteraction);
+
+    }
+
+    public void removeIteraction(ConnectorIteraction iteraction) throws EmptyCollectionException {
+        this.iteractions.remove(iteraction);
+
+    }
+
+    public ArrayUnorderedList<ConnectorIteraction> getIteractions() {
         return iteractions;
     }
 
-    public void setIteractions(ConnectorIteraction[] iteractions) {
+    public void setIteractions(ArrayUnorderedList<ConnectorIteraction> iteractions) {
         this.iteractions = iteractions;
-    }
-
-    public void setIteraction(ConnectorIteraction iteraction) {
-        this.iteractions[iteractions.length] = iteraction;
     }
 
     @Override
     public String toString() {
-        return "Connectors{" + "cooldown=" + cooldown + ", iteractions=" + Arrays.toString(iteractions) + '}';
+        return "Connectors{" + "cooldown=" + cooldown + ", iteractions=" + iteractions.toString() + '}';
     }
-
 }

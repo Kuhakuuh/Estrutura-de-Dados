@@ -45,7 +45,5 @@ public class Portal extends Local {
     @Override
     public String toString() {
         return "Portal{" + "nome=" + nome + ", estado=" + estado + ", jogador=" + jogador + '}';
-    }
-
-    
+    }    
 }

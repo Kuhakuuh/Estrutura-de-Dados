@@ -11,6 +11,7 @@ import Locals.Local;
 import Locals.Portal;
 import Management.LocalManagement;
 import Management.RouteManagement;
+import java.io.FileNotFoundException;
 import network.Network;
 
 /**
@@ -22,7 +23,7 @@ public class TrabalhoPartico {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, Exception {
         CalculateDistance calculate = new CalculateDistance();
 
         System.out.println(calculate.distance(40.7656918, 40.7697989, -73.9737489, -73.9723702, 0, 0));
@@ -83,6 +84,10 @@ public class TrabalhoPartico {
         System.out.println(lm.getMap().toString());
         System.out.println(lm.getMap().shortestPathWeight(portal4, portal1));
         System.out.println(lm.getMap().isConnected());
+        lm.listPortals();
+        lm.listConnectors();
+        lm.importJson();
+
     }
 
 }

@@ -11,12 +11,21 @@ package trabalhopartico;
  */
 public class CalculateDistance {
 
-    /* Calculate distance between two points in latitude 
-and longitude taking into account height difference. 
-If you are not interested in height difference pass 0.0.
- Uses Haversine method as its base. lat1, lon1 Start point 
-lat2, lon2 End point el1 Start altitude in meters el2 End altitude 
-in meters */
+    /**
+     * Calculate distance between two points in latitude and longitude taking
+     * into account height difference.If you are not interested in height
+     * difference pass 0.0.Uses Haversine method as its base.lat1, lon1 Start
+     * point lat2, lon2 End point el1 Start altitude in meters el2 End altitude
+     * in meters
+     *
+     * @param lat1
+     * @param lat2
+     * @param lon1
+     * @param lon2
+     * @param el1
+     * @param el2
+     * @return
+     */
     public double distance(double lat1, double lat2, double lon1, double lon2,
             double el1, double el2) {
 
