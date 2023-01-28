@@ -178,6 +178,18 @@ public class LocalManagement<T> {
             JsonObject portalObject = (JsonObject) iterPortals.next();
             Portal tempPortal = new Portal();
             tempPortal.setNome(portalObject.get("name").getAsString());
+            tempPortal.setId(portalObject.get("id").getAsInt());
+            tempPortal.setLatitude(portalObject.get("coordinates").
+                    getAsJsonObject().get("latitude").getAsDouble());
+            tempPortal.setLongitude(portalObject.get("coordinates")
+                    .getAsJsonObject().get("longitude").getAsDouble());
+            tempPortal.setEnergyAmount(portalObject.get("gameSettings")
+                    .getAsJsonObject().get("energy").getAsInt());
+            Player tempPlayer = new Player();
+            tempPlayer.setName(portalObject.get("gameSettings")
+                    .getAsJsonObject().get("ownership").getAsJsonObject()
+                    .get("player").getAsString());
+            tempPortal.setJogador(tempPlayer);
             portais.addToRear(tempPortal);
         }
         return portais;
