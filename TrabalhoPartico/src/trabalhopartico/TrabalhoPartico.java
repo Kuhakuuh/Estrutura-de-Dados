@@ -12,6 +12,7 @@ import Locals.Portal;
 import Management.LocalManagement;
 import Management.RouteManagement;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 import network.Network;
 
 /**
@@ -81,12 +82,23 @@ public class TrabalhoPartico {
         rm.addRoute(portal2, c1, calculate.distance(portal2.getLatitude(), c1.getLatitude(), portal2.getLongitude(), c1.getLongitude(), 0, 0));
         rm.addRoute(portal3, c1, calculate.distance(portal3.getLatitude(), c1.getLatitude(), portal3.getLongitude(), c1.getLongitude(), 0, 0));
         rm.addRoute(portal4, c1, calculate.distance(portal4.getLatitude(), c1.getLatitude(), portal4.getLongitude(), c1.getLongitude(), 0, 0));
+        rm.addRoute(portal1, portal2, 1.5445);
+        rm.addRoute(portal2, portal3, 1.3043);
         System.out.println(lm.getMap().toString());
         System.out.println(lm.getMap().shortestPathWeight(portal4, portal1));
+
         System.out.println(lm.getMap().isConnected());
         lm.listPortals();
         lm.listConnectors();
-        lm.importJson();
+
+        //lm.importJson();
+
+        Iterator iter = lm.getMap().iteratorShortestPath(portal1, portal4);
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+
+        lm.exportJson("C:\\Users\\Tiago Lopes\\Documents\\TrabalhoEd\\TrabalhoPartico\\src\\test.json");
 
     }
 

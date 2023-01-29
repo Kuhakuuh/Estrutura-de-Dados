@@ -110,7 +110,9 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
 
     /**
      * ****************************************************************
-     * Inserts an edge between two vertices of the graph.****************************************************************
+     * Inserts an edge between two vertices of the graph.
+     *
+     ****************************************************************
      * @param index1
      * @param index2
      * @param weight
@@ -124,7 +126,9 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
 
     /**
      * ****************************************************************
-     * Removes an edge between two vertices of the graph.****************************************************************
+     * Removes an edge between two vertices of the graph.
+     *
+     ****************************************************************
      * @param index1
      * @param index2
      */
@@ -207,7 +211,9 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
     /**
      * ****************************************************************
      * Removes a vertex at the given index from the graph.Note that this may
- affect the index values of other vertices. ****************************************************************
+     * affect the index values of other vertices.
+     *
+     ****************************************************************
      * @param index
      */
     public void removeVertex(int index) {
@@ -322,9 +328,11 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
     /**
      * ****************************************************************
      * Returns an iterator that performs a breadth first search traversal
-     * starting at the given index.****************************************************************
+     * starting at the given index.
+     *
+     ****************************************************************
      * @param startIndex
-     * @return 
+     * @return
      */
     @Override
     public Iterator<T> iteratorBFS(int startIndex) {
@@ -381,14 +389,16 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
     /**
      * ****************************************************************
      * Returns an iterator that contains the indices of the vertices that are in
-     * the shortest path between the two given vertices.****************************************************************
+     * the shortest path between the two given vertices.
+     *
+     ****************************************************************
      * @param startIndex
      * @param targetIndex
-     * @return 
+     * @return
      * @throws linkedheap.EmptyCollectionException
      * @throws linkedstack.EmptyCollectionException
      */
-    protected Iterator<Integer> iteratorShortestPathIndices(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException {
+    public Iterator<Integer> iteratorShortestPathIndices(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException {
         int index;
         double weight;
         int[] predecessor = new int[numberVertices];
@@ -505,10 +515,12 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
     /**
      * ****************************************************************
      * Returns an iterator that contains the shortest path between the two
-     * vertices.****************************************************************
+     * vertices.
+     *
+     ****************************************************************
      * @param startIndex
      * @param targetIndex
-     * @return 
+     * @return
      */
     @Override
     public Iterator<T> iteratorShortestPath(int startIndex, int targetIndex) {
@@ -525,7 +537,9 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
             Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
         }
         while (it.hasNext()) {
-            templist.addToRear(vertices[(it.next())]);
+            int pos = it.next();
+            //System.out.println(pos);
+            templist.addToRear(vertices[pos]);
         }
         return templist.iterator();
     }
@@ -551,7 +565,9 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
     /**
      * ****************************************************************
      * Returns the weight of the least weight path in the network.Returns
- positive infinity if no path is found.****************************************************************
+     * positive infinity if no path is found.
+     *
+     ****************************************************************
      * @param startVertex
      * @param targetVertex
      */
@@ -566,13 +582,14 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
         }
         return result;
     }
+
     /**
-     * 
+     *
      * @param startIndex
      * @param targetIndex
      * @return
      * @throws linkedheap.EmptyCollectionException
-     * @throws EmptyCollectionException 
+     * @throws EmptyCollectionException
      */
     public double shortestPathWeight(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException {
         double result = 0;
@@ -601,8 +618,10 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
 
     /**
      * ****************************************************************
-     * Returns a minimum spanning tree of the network.****************************************************************
-     * @return 
+     * Returns a minimum spanning tree of the network.
+     *
+     ****************************************************************
+     * @return
      * @throws linkedheap.EmptyCollectionException
      */
     public Network<T> mstNetwork() throws linkedheap.EmptyCollectionException {
