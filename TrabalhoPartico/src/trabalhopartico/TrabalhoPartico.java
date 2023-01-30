@@ -11,6 +11,7 @@ import Locals.Local;
 import Locals.Portal;
 import Management.LocalManagement;
 import Management.RouteManagement;
+import Player.Player;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 import network.Network;
@@ -26,11 +27,27 @@ public class TrabalhoPartico {
      */
     public static void main(String[] args) throws FileNotFoundException, Exception {
         CalculateDistance calculate = new CalculateDistance();
-
+        
         System.out.println(calculate.distance(40.7656918, 40.7697989, -73.9737489, -73.9723702, 0, 0));
         System.out.println("########################################");
         LocalManagement lm = new LocalManagement();
-
+        
+        Player player1 = new Player();
+        player1.setName("Kuuhaku Sensei");
+        player1.setCurrentEnergy(2500);
+        player1.setEnergy(10000);
+        player1.setExperience(34235345);
+        player1.setLevel(10);
+        player1.setEquipa(Estado.SPARKS);
+        
+        Player player2 = new Player();
+        player2.setName("Raickou");
+        player2.setCurrentEnergy(2500);
+        player2.setEnergy(10000);
+        player2.setExperience(34235345);
+        player2.setLevel(10);
+        player2.setEquipa(Estado.GIANTS);
+        
         Portal portal1 = new Portal();
         portal1.setNome("Ionia");
         portal1.setId(110);
@@ -38,7 +55,8 @@ public class TrabalhoPartico {
         portal1.setEnergyAmount(150);
         portal1.setLatitude(35.432542);
         portal1.setLongitude(-44.973748);
-
+        portal1.setJogador(player1);
+        
         Portal portal2 = new Portal();
         portal2.setNome("Demacia");
         portal2.setId(112);
@@ -46,7 +64,8 @@ public class TrabalhoPartico {
         portal2.setEnergyAmount(140);
         portal2.setLatitude(90.432542);
         portal2.setLongitude(-32.973748);
-
+        portal2.setJogador(player2);
+        
         Portal portal3 = new Portal();
         portal3.setNome("Piltover");
         portal3.setId(113);
@@ -54,7 +73,8 @@ public class TrabalhoPartico {
         portal3.setEnergyAmount(130);
         portal3.setLatitude(67.432542);
         portal3.setLongitude(-42.973748);
-
+        portal3.setJogador(player1);
+        
         Portal portal4 = new Portal();
         portal4.setNome("Noxus");
         portal4.setId(114);
@@ -62,22 +82,23 @@ public class TrabalhoPartico {
         portal4.setEnergyAmount(120);
         portal4.setLatitude(91.432542);
         portal4.setLongitude(-13.973748);
-
+        portal4.setJogador(player2);
+        
         Connectors c1 = new Connectors();
         c1.setCooldown(5000);
         c1.setEnergyAmount(140);
         c1.setId(111);
         c1.setLatitude(23.23123);
         c1.setLatitude(-53.2314);
-
+        
         lm.addPortal(portal1);
         lm.addPortal(portal2);
         lm.addPortal(portal3);
         lm.addPortal(portal4);
         lm.addConnector(c1);
-
+        
         RouteManagement rm = new RouteManagement(lm.getMap());
-
+        
         rm.addRoute(portal1, c1, calculate.distance(portal1.getLatitude(), c1.getLatitude(), portal1.getLongitude(), c1.getLongitude(), 0, 0));
         rm.addRoute(portal2, c1, calculate.distance(portal2.getLatitude(), c1.getLatitude(), portal2.getLongitude(), c1.getLongitude(), 0, 0));
         rm.addRoute(portal3, c1, calculate.distance(portal3.getLatitude(), c1.getLatitude(), portal3.getLongitude(), c1.getLongitude(), 0, 0));
@@ -86,20 +107,13 @@ public class TrabalhoPartico {
         rm.addRoute(portal2, portal3, 1.3043);
         System.out.println(lm.getMap().toString());
         System.out.println(lm.getMap().shortestPathWeight(portal4, portal1));
-
+        
         System.out.println(lm.getMap().isConnected());
+        lm.importJson("src/exemplo(1).json");
         lm.listPortals();
         lm.listConnectors();
-
-        //lm.importJson();
-
-        Iterator iter = lm.getMap().iteratorShortestPath(portal1, portal4);
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
-
-        lm.exportJson("C:\\Users\\Tiago Lopes\\Documents\\TrabalhoEd\\TrabalhoPartico\\src\\test.json");
-
+        lm.exportJson("src/test.json");
+        
     }
-
+    
 }
