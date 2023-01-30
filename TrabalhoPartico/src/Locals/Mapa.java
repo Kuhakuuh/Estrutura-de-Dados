@@ -9,14 +9,13 @@ import arrayunorderedlist.ArrayUnorderedList;
 import network.Network;
 
 /**
- * Class that represents the map formad by all the locals(Portals and Connectors), extends class Network
+ * Class that represents the map formad by all the locals(Portals and
+ * Connectors), extends class Network
+ *
  * @author Tiago Lopes, Rafael Dias
  * @param <T>
  */
 public class Mapa<T> extends Network<T> {
-
-    private ArrayUnorderedList<Portal> portals = new ArrayUnorderedList<Portal>();
-    private ArrayUnorderedList<Connectors> connectors = new ArrayUnorderedList<Connectors>();
 
     public Mapa() {
         super();
@@ -24,28 +23,32 @@ public class Mapa<T> extends Network<T> {
 
     /**
      * Returns an array of all Portals
+     *
      * @return ArrayUnorderedList
      */
     public ArrayUnorderedList getPortals() {
+        ArrayUnorderedList<Portal> tempPortals = new ArrayUnorderedList<Portal>();
         for (T vertice : vertices) {
             if (vertice != null && vertice.getClass() != Connectors.class) {
-                portals.addToRear((Portal) vertice);
+                tempPortals.addToRear((Portal) vertice);
             }
         }
-        return portals;
+        return tempPortals;
     }
 
     /**
      * Returns an array of all Connectors
+     *
      * @return ArrayUnorderedList
      */
     public ArrayUnorderedList getConnectors() {
+        ArrayUnorderedList<Connectors> tempConnectors = new ArrayUnorderedList<Connectors>();
         for (T vertice : vertices) {
             if (vertice != null && vertice.getClass() != Portal.class) {
-                connectors.addToRear((Connectors) vertice);
+                tempConnectors.addToRear((Connectors) vertice);
             }
         }
-        return connectors;
+        return tempConnectors;
     }
 
 }
