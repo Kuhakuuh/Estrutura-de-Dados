@@ -7,7 +7,7 @@ package arrayunorderedlist;
 
 /**
  *
- * @author Tiago
+ * @author Tiago Lopes, Rafael Dias
  */
 import java.util.Iterator;
 

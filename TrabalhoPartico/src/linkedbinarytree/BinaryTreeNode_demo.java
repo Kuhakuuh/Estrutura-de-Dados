@@ -7,7 +7,7 @@ package linkedbinarytree;
 
 /**
  *
- * @author Carlos
+ * @author Tiago Lopes, Rafael Dias
  */
 public class BinaryTreeNode_demo {
 

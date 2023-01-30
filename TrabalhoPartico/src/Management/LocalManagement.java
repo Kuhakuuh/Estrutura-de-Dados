@@ -31,7 +31,7 @@ import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  * @param <T>
  */
 public class LocalManagement<T> {

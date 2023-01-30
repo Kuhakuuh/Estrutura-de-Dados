@@ -14,7 +14,7 @@ import linkedqueue.LinkedQueue;
 
 /**
  *
- * @author Carlos
+ * @author Tiago Lopes, Rafael Dias
  */
 /**
  * LinkedBinaryTree implements the BinaryTreeADT interface

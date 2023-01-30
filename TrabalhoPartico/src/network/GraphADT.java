@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  * @param <T>
  */
 public interface GraphADT<T> {

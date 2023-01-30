@@ -7,7 +7,7 @@ package linkedbinarytree;
 
 /**
  *
- * @author Carlos
+ * @author Tiago Lopes, Rafael Dias
  */
 /**
  * BinaryTreeNode represents a node in a binary tree with a left and right

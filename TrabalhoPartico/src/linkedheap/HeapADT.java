@@ -10,7 +10,7 @@ import linkedbinarytree.BinaryTreeADT;
 
 /**
  *
- * @author Carlos
+ * @author Tiago Lopes, Rafael Dias
  */
 public interface HeapADT<T> extends BinaryTreeADT<T> {
 

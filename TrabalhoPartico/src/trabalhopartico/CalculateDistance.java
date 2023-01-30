@@ -7,7 +7,7 @@ package trabalhopartico;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  */
 public class CalculateDistance {
 

@@ -7,7 +7,7 @@ package linkedqueue;
 
 /**
  *
- * @author Tiago
+ * @author Tiago Lopes, Rafael Dias
  */
 public interface QueueADT<T> {
 
