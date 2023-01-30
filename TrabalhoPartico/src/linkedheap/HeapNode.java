@@ -9,7 +9,7 @@ import linkedbinarytree.BinaryTreeNode;
 
 /**
  *
- * @author Carlos
+ * @author Tiago Lopes, Rafael Dias
  */
 public class HeapNode<T> extends BinaryTreeNode<T> {
 

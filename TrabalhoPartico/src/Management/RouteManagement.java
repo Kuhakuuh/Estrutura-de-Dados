@@ -10,7 +10,7 @@ import network.Network;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  */
 public class RouteManagement<T> {
 

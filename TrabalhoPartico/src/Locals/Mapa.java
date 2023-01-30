@@ -5,15 +5,12 @@
  */
 package Locals;
 
-import Locals.Connectors;
-import Locals.Local;
-import Locals.Portal;
 import arrayunorderedlist.ArrayUnorderedList;
 import network.Network;
 
 /**
- *
- * @author Tiago Lopes
+ * Class that represents the map formad by all the locals(Portals and Connectors), extends class Network
+ * @author Tiago Lopes, Rafael Dias
  * @param <T>
  */
 public class Mapa<T> extends Network<T> {
@@ -27,8 +24,7 @@ public class Mapa<T> extends Network<T> {
 
     /**
      * Returns an array of all Portals
-     *
-     * @return
+     * @return ArrayUnorderedList
      */
     public ArrayUnorderedList getPortals() {
         for (T vertice : vertices) {
@@ -41,8 +37,7 @@ public class Mapa<T> extends Network<T> {
 
     /**
      * Returns an array of all Connectors
-     *
-     * @return
+     * @return ArrayUnorderedList
      */
     public ArrayUnorderedList getConnectors() {
         for (T vertice : vertices) {

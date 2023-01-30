@@ -7,7 +7,7 @@ package network;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  * @param <T>
  */
 public interface NetworkADT<T> extends GraphADT<T> {

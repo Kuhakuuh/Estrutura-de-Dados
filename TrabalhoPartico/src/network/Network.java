@@ -17,7 +17,7 @@ import linkedstack.LinkedStack;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  * @param <T>
  */
 public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {

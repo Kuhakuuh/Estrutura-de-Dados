@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Carlos
+ * @author Tiago Lopes, Rafael Dias
  */
 public class LinkedBinaryTree_demo {
     /**

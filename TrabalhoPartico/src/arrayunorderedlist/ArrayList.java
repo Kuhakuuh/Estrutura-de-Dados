@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 
 /**
  *
- * @author Tiago
+ * @author Tiago Lopes, Rafael Dias
  */
 public abstract class ArrayList<T> implements ListADT<T> {
 

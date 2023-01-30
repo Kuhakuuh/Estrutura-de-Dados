@@ -8,7 +8,7 @@ package linkedheap;
 /**
  * PriorityQueueNode represents a node in a priority queue containing a
  * comparable object, order, and a priority value.
- *
+ * @author Tiago Lopes, Rafael Dias
  */
 public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode> {
 

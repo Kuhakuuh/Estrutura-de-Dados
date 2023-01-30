@@ -14,7 +14,7 @@ import linkedstack.LinkedStack;
 /**
  * Graph represents an adjacency matrix implementation of a graph
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  * @param <T>
  */
 public class MatrixGraph<T> implements GraphADT<T> {

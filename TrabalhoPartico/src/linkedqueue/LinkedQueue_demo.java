@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Tiago
+ * @author Tiago Lopes, Rafael Dias
  */
 public class LinkedQueue_demo {
 

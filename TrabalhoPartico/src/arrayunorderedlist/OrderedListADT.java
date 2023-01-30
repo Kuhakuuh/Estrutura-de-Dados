@@ -7,7 +7,7 @@ package arrayunorderedlist;
 
 /**
  *
- * @author Tiago
+ * @author Tiago Lopes, Rafael Dias
  */
 public interface OrderedListADT<T> extends ListADT<T> {
 

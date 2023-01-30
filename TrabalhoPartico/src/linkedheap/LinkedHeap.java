@@ -9,11 +9,7 @@ import linkedbinarytree.LinkedBinaryTree;
 
 /**
  * Heap implements a heap.
- *
- */
-/**
- * Heap implements a heap.
- *
+ * @author Tiago Lopes, Rafael Dias
  */
 public class LinkedHeap<T> extends LinkedBinaryTree<T>
         implements HeapADT<T> {

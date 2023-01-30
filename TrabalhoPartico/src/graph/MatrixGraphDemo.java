@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  */
 public class MatrixGraphDemo {
 

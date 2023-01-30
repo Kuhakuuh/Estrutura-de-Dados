@@ -8,7 +8,7 @@ package linkedheap;
 
 /**
  *
- * @author Carlos
+ * @author Tiago Lopes, Rafael Dias
  */
 public class EmptyCollectionException extends Exception{
     

@@ -7,7 +7,7 @@ package linkedstack;
 
 /**
  *
- * @author Tiago
+ * @author Tiago Lopes, Rafael Dias
  */
 public class LinkedStack_demo {
 
