@@ -77,5 +77,14 @@ public class ArrayUnorderedList<T> extends ArrayList<T> implements UnorderedList
         }
         super.list[index] = element;
     }
+    
+    @Override
+    public String toString(){
+        String msg="";
+        for(int i=0;i<count;i++){
+            msg+="\n"+list[i];
+        }
+        return msg;
+    }
 
 }

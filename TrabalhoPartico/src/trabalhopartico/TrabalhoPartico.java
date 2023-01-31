@@ -12,8 +12,10 @@ import Locals.Portal;
 import Management.LocalManagement;
 import Management.PlayerManagement;
 import Management.RouteManagement;
+import Player.ConnectorIteraction;
 import Player.Player;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import network.Network;
 
@@ -85,12 +87,17 @@ public class TrabalhoPartico {
         portal4.setLongitude(-13.973748);
         portal4.setJogador(player2);
 
+        ConnectorIteraction ci = new ConnectorIteraction();
+        ci.setLastIteraction(LocalDateTime.now());
+        ci.setPlayer(player1.getName());
+
         Connectors c1 = new Connectors();
         c1.setCooldown(5000);
         c1.setEnergyAmount(140);
         c1.setId(111);
         c1.setLatitude(23.23123);
         c1.setLatitude(-53.2314);
+        c1.setIteraction(ci);
 
         lm.addPortal(portal1);
         lm.addPortal(portal2);
@@ -106,7 +113,6 @@ public class TrabalhoPartico {
         rm.addRoute(portal4, c1, calculate.distance(portal4.getLatitude(), c1.getLatitude(), portal4.getLongitude(), c1.getLongitude()));
         rm.addRoute(portal1, portal2, 1.5445);
         rm.addRoute(portal2, portal3, 1.3043);
-        
 
         System.out.println(lm.getMap().isConnected());
         lm.importJson("src/exemplo(1).json");
@@ -119,16 +125,15 @@ public class TrabalhoPartico {
         System.out.println(lm.getMap().toString());
         System.out.println(lm.getMap().shortestPathWeight(portal4, portal1));
 
-
         //lm.importJson();
-
+        System.out.println("-----Caminho mas curto------");
         Iterator iter = lm.getMap().iteratorShortestPath(portal1, portal4);
         while (iter.hasNext()) {
-            System.out.println(iter.next());
+            System.out.println("Ponto:" + iter.next());
         }
 
-        lm.exportJson("C:\\Users\\Tiago Lopes\\Documents\\TrabalhoEd\\TrabalhoPartico\\src\\test.json");
-        
+        lm.exportJson("src/test.json");
+
         PlayerManagement pm = new PlayerManagement();
         pm.addPlayer("Raickou");
         pm.addPlayer("Elafar");
@@ -136,15 +141,15 @@ public class TrabalhoPartico {
         System.out.println(pm.toString());
         pm.addTeam("Raickou", Estado.GIANTS);
         pm.addPlayer("P3");
-        pm.updatePlayer("Raickou", -1, -1, 3, -1, true,2);
-        pm.updatePlayer("Elafar", -1, -1, 4, -1, true,6);
-        pm.updatePlayer("P3", -1, -1, 1, -1, true,3);
+        pm.updatePlayer("Raickou", -1, -1, 3, -1, true, 2);
+        pm.updatePlayer("Elafar", -1, -1, 4, -1, true, 6);
+        pm.updatePlayer("P3", -1, -1, 1, -1, true, 3);
+        pm.importJson("src/exemplo(1).json");
+        pm.exportJson("src/player.json");
         System.out.println(pm.toString());
-        System.out.println("\nLista de jogadores ordenados de forma crescente pelo level"+pm.listPlayerPerLevel());
-        System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados"+ pm.listPlayerPerConquestPortals());
+        System.out.println("\nLista de jogadores ordenados de forma crescente pelo level" + pm.listPlayerPerLevel());
+        System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados" + pm.listPlayerPerConquestPortals());
 
-
-        
     }
 
 }

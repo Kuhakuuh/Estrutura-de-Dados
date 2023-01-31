@@ -71,6 +71,6 @@ public class Connectors extends Local {
      */
     @Override
     public String toString() {
-        return super.toString()+" Connectors{" + "cooldown=" + cooldown + ", iteractions=" + iteractions.toString() + '}';
+        return super.toString()+" Connectors{" + "cooldown=" + cooldown + ", iteractions=" + iteractions + '}';
     }
 }

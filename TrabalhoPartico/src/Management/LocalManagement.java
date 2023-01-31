@@ -6,6 +6,7 @@
 package Management;
 
 import Enumerations.Estado;
+import Excepcions.NoSuchElementeException;
 import Locals.Connectors;
 import Locals.Local;
 import Locals.Portal;
@@ -158,7 +159,7 @@ public class LocalManagement<T> {
      * @param iteraction
      * @throws arrayunorderedlist.EmptyCollectionException
      */
-    public void removeConnectorIteraction(Connectors connector, ConnectorIteraction iteraction) throws EmptyCollectionException, NullLocalExeception, NullInterationExeception {
+    public void removeConnectorIteraction(Connectors connector, ConnectorIteraction iteraction) throws EmptyCollectionException, NullLocalExeception, NullInterationExeception, NoSuchElementeException, Excepcions.EmptyCollectionException {
         if (connector == null) {
             throw new NullLocalExeception("Valor null");
         } else if (iteraction == null) {
