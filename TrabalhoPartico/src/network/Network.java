@@ -756,4 +756,16 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
         adjMatrixNetwork = largerAdjMatrix;
     }
 
+    public double[][] getAdjMatrixNetwork() {
+        return adjMatrixNetwork;
+    }
+
+    public void setAdjMatrixNetwork(double[][] adjMatrixNetwork) {
+        this.adjMatrixNetwork = adjMatrixNetwork;
+    }
+
+    public int getNumberVertices() {
+        return numberVertices;
+    }
+
 }

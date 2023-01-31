@@ -35,7 +35,7 @@ import org.json.simple.parser.ParseException;
 public class LocalManagement<T> {
 
     private Mapa<Local> map = new Mapa<Local>();
-
+    
     /**
      * Empty construtor
      */
@@ -198,7 +198,6 @@ public class LocalManagement<T> {
         if ("".equals(path)) {
             throw new InvalidPathValueExeception("Valor inválido");
         }
-        path = "src/exemplo(1).json";
         Iterator iterPortals = importPortals(path).iterator();
         while (iterPortals.hasNext()) {
             Portal tempPortal = (Portal) iterPortals.next();
@@ -350,6 +349,7 @@ public class LocalManagement<T> {
         }
         return locals;
     }
+
 
     /**
      * Export the data of Locals to a json file
