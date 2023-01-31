@@ -143,7 +143,7 @@ public class TrabalhoPartico {
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo level"+pm.listPlayerPerLevel());
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados"+ pm.listPlayerPerConquestPortals());
 
-        lm.exportJson("src/test.json");
+
         
     }
 
