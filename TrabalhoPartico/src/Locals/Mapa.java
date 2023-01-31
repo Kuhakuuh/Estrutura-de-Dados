@@ -6,6 +6,7 @@
 package Locals;
 
 import arrayunorderedlist.ArrayUnorderedList;
+import java.util.Iterator;
 import network.Network;
 
 /**
@@ -50,5 +51,6 @@ public class Mapa<T> extends Network<T> {
         }
         return tempConnectors;
     }
+    
 
 }

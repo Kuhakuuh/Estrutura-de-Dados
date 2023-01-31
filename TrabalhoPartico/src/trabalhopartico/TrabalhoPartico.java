@@ -9,6 +9,7 @@ import Enumerations.Estado;
 import Locals.Connectors;
 import Locals.Local;
 import Locals.Portal;
+import Management.GameManagement;
 import Management.LocalManagement;
 import Management.PlayerManagement;
 import Management.RouteManagement;
@@ -121,7 +122,7 @@ public class TrabalhoPartico {
             System.out.println(iter.next());
         }
 
-        lm.exportJson("C:\\Users\\Tiago Lopes\\Documents\\TrabalhoEd\\TrabalhoPartico\\src\\test.json");
+        lm.exportJson("src/test.json");
         
         PlayerManagement pm = new PlayerManagement();
         pm.addPlayer("Raickou");
@@ -138,6 +139,14 @@ public class TrabalhoPartico {
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados"+ pm.listPlayerPerConquestPortals());
 
         lm.exportJson("src/test.json");
+        
+        GameManagement gm = new GameManagement(lm.getMap());
+        System.out.println("\n\nShort Path\n\n");
+        System.out.println(gm.calculateShortestPathBeetweenTwoPoints(portal2,c1));
+        
+        System.out.println("\n\nShort Path2\n\n");
+        System.out.println(gm.calculateShortestPathOnlyThrowPortalsorConnectors(portal2,portal3));
+        
         
     }
     
