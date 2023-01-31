@@ -16,15 +16,69 @@ import Enumerations.Estado;
  *      currentEnergy: current level of the energy of the player
  *      level: level of the player
  *      experience: experience points of the player
+ *      startLevel: start level of the new player 
+ *      startEnergy: start energy of the new player
+ *      enable: indicates if the player is playable
+ *      numConquerPortals: number of portals conquer by the player
  * @author Tiago Lopes, Rafael Dias
  */
-public class Player {
+public class Player implements Comparable{ 
     private String name;
     private Estado equipa;
     private int energy;
     private int currentEnergy;
     private int level;
     private double experience;
+    private boolean enable;
+    private int numConquerPortals;
+    
+    private final int startLevel=1;
+    private final int startEnergy=50;
+    
+    /**
+     * Empty construtor
+     */
+    public Player() {
+
+    }
+
+    /**
+     * Full Construtor
+     * @param name
+     * @param equipa
+     * @param energy
+     * @param currentEnergy
+     * @param level
+     * @param experience
+     * @param enable
+     * @param numConquerPortals
+     */
+    public Player(String name, Estado equipa, int energy, int currentEnergy, int level, double experience, boolean enable,int numConquerPortals) {
+        this.name = name;
+        this.equipa = equipa;
+        this.energy = energy;
+        this.currentEnergy = currentEnergy;
+        this.level = level;
+        this.experience = experience;
+        this.enable = enable;
+        this.numConquerPortals=numConquerPortals;
+    }
+    
+    
+    /**
+     * Construtor that receives the name of the new player
+     * @param name
+     */
+    public Player(String name) {
+            this.name=name;
+            this.energy=startEnergy;
+            this.currentEnergy=startEnergy;
+            this.level=startLevel;
+            this.experience=0;
+            this.enable=true;
+            this.equipa=Estado.NEUTRO;
+            this.numConquerPortals=0;
+    }
 
     /**
      * Returns the name
@@ -122,12 +176,50 @@ public class Player {
     }
     
     /**
+    * Returns the enable state of the player
+    * @return boolean
+    */
+    public boolean getEnable() {
+        return enable;
+    }
+    
+    /**
+     * Assigns the enable state of the player
+     * @param enable     
+     */
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+    
+    /**
+    * Returns the number of conquer portals
+    * @return int
+    */
+    public int getNumConquerPortals() {
+        return numConquerPortals;
+    }
+    
+    /**
+     * Assigns the number of conquer portals
+     * @param numConquerPortals     
+     */
+    public void setNumConquerPortals(int numConquerPortals) {
+        this.numConquerPortals = numConquerPortals;
+    }
+    
+    /**
      * Returns all informtation of the Player in a unique String 
      * @return String
      */
     @Override
     public String toString() {
         return "Player{" + "name=" + name + ", equipa=" + equipa + ", energy=" + energy + ", level=" + level + ", experience=" + experience + '}';
+    }
+
+    @Override
+    public int compareTo(Object player) {
+        Player jogador = (Player) player;
+        return this.name.compareTo(jogador.getName());
     }
     
     

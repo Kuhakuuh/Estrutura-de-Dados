@@ -19,6 +19,7 @@ import linkedqueue.LinkedQueue;
 /**
  * LinkedBinaryTree implements the BinaryTreeADT interface
  *
+ * @param <T>
  */
 public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
 
