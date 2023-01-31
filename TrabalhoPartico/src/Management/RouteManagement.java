@@ -5,9 +5,23 @@
  */
 package Management;
 
+import Locals.Connectors;
 import Locals.Local;
 import Locals.Mapa;
+import Locals.Portal;
+import arrayunorderedlist.ArrayUnorderedList;
+import execeptions.InvalidPathValueExeception;
 import execeptions.NullLocalExeception;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import trabalhopartico.CalculateDistance;
 
 /**
  *
@@ -17,31 +31,125 @@ import execeptions.NullLocalExeception;
 public class RouteManagement<T> {
 
     Mapa<Local> map = new Mapa<>();
+    private int numberOfRoutes;
 
     public RouteManagement(Mapa map) {
         this.map = map;
+        this.numberOfRoutes = 0;
     }
 
+    /**
+     * Adds a route(edge) to map
+     *
+     * @param local1
+     * @param local2
+     * @param weight
+     * @throws NullLocalExeception
+     */
     public void addRoute(Local local1, Local local2, double weight) throws NullLocalExeception {
         if (local1 == null || local2 == null) {
             throw new NullLocalExeception("Valor inválido");
         }
         map.addEdge(local1, local2, weight);
+        this.numberOfRoutes++;
     }
 
+    /**
+     * Removes a route from the map
+     *
+     * @param local1
+     * @param local2
+     * @throws NullLocalExeception
+     */
     public void removeRoute(Local local1, Local local2) throws NullLocalExeception {
         if (local1 == null || local2 == null) {
             throw new NullLocalExeception("Valor inválido");
         }
         map.removeEdge(local1, local2);
+        this.numberOfRoutes--;
 
     }
 
-    public void importRoute(String path) {
-
+    /**
+     * Imports the routes from the json file assuming that the locals are
+     * already imported
+     *
+     * @param path
+     * @throws execeptions.InvalidPathValueExeception
+     * @throws java.io.FileNotFoundException
+     * @throws org.json.simple.parser.ParseException
+     * @throws execeptions.NullLocalExeception
+     */
+    public void importRoute(String path) throws InvalidPathValueExeception, FileNotFoundException, IOException, ParseException, NullLocalExeception {
+        if ("".equals(path)) {
+            throw new InvalidPathValueExeception("Valor inválido");
+        }
+        ArrayUnorderedList<JSONObject> routesList = new ArrayUnorderedList<>();
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(path));
+        JSONObject json = (JSONObject) obj;
+        JSONArray routes = (JSONArray) json.get("routes");
+        for (int i = 0; i < routes.size(); i++) {
+            JSONObject route = (JSONObject) routes.get(i);
+            routesList.addToRear(route);
+        }
+        CalculateDistance calculate = new CalculateDistance();
+        Iterator iterRoute = routesList.iterator();
+        while (iterRoute.hasNext()) {
+            JSONObject route = (JSONObject) iterRoute.next();
+            Local local1 = findLocalById((int) (long) route.get("from"));
+            Local local2 = findLocalById((int) (long) route.get("to"));
+            addRoute(local1, local2, calculate.distance(local1.getLatitude(),
+                    local2.getLatitude(), local1.getLongitude(),
+                    local2.getLongitude()));
+        }
     }
 
-    public void exportRoute(String path) {
+    private Local findLocalById(int id) {
+        Iterator iter = map.getLocals().iterator();
+        while (iter.hasNext()) {
+            Local tempLocal = (Local) iter.next();
+            if (tempLocal.getId() == id) {
+                return tempLocal;
+            }
+        }
+        return null;
+    }
+
+    public void exportRoute(String path) throws InvalidPathValueExeception, IOException, ParseException {
+        if ("".equals(path)) {
+            throw new InvalidPathValueExeception("Valor inválido");
+        }
+        JSONArray routesArray = new JSONArray();
+
+        for (int i = 0; i < map.getNumberVertices(); i++) {
+            for (int j = map.getNumberVertices() - 1; j > i; j--) {
+                if (map.getAdjMatrixNetwork()[i][j] < Double.POSITIVE_INFINITY) {
+                    JSONObject route = new JSONObject();
+                    route.put("from", i);
+                    route.put("to", j);
+                    routesArray.add(route);
+                }
+            }
+        }
+        // Caso seja para manter os dados atuais do ficheiro
+//        JSONParser parser = new JSONParser();
+//        Object obj = parser.parse(new FileReader(path));
+//        JSONObject json = (JSONObject) obj;
+//        JSONArray jsonArray = (JSONArray) json.get("routes");
+//        if (jsonArray != null) {
+//            for (int i = 0; i < jsonArray.size(); i++) {
+//                JSONObject route = (JSONObject) jsonArray.get(i);
+//                routesArray.add(route);
+//            }
+//        }
+        JSONObject json = new JSONObject();
+        json.put("routes", routesArray);
+        try (FileWriter file = new FileWriter(path)) {
+            file.write(json.toJSONString());
+
+            file.flush();
+        }
 
     }
 

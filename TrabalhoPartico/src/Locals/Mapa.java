@@ -20,7 +20,7 @@ public class Mapa<T> extends Network<T> {
     public Mapa() {
         super();
     }
-
+    
     /**
      * Returns an array of all Portals
      *
@@ -51,4 +51,12 @@ public class Mapa<T> extends Network<T> {
         return tempConnectors;
     }
 
+    public ArrayUnorderedList getLocals() {
+        ArrayUnorderedList<Local> tempLocal = new ArrayUnorderedList<Local>();
+        for (T vertice : vertices) {
+            tempLocal.addToRear((Local) vertice);
+
+        }
+        return tempLocal;
+    }
 }
