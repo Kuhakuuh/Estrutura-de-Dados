@@ -11,9 +11,18 @@ import Player.Player;
 import Excepcions.InvalidTeamException;
 import arrayOrderedList.ArrayOrderedList;
 import arrayunorderedlist.*;
+import execeptions.InvalidPathValueExeception;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import linkedheap.PriorityQueueNode;
 import linkedstack.LinkedStack;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * Class used to managed the players
@@ -21,14 +30,14 @@ import linkedstack.LinkedStack;
  * @author Tiago Lopes, Rafael Dias
  */
 public class PlayerManagement {
-
+    
     ArrayUnorderedList<Player> playersList = new ArrayUnorderedList<Player>();
 
     /**
      * Empty construtor
      */
     public PlayerManagement() {
-
+        
     }
 
     /**
@@ -60,7 +69,7 @@ public class PlayerManagement {
             if (nome.equals(jogador.getName())) {
                 exist = true;
             }
-
+            
         }
         return exist;
     }
@@ -96,7 +105,7 @@ public class PlayerManagement {
      * @throws Excepcions.NoSuchElementeException if the request element dont
      * exist
      */
-    public void updatePlayer(String name, int energy, int currentEnergy, int level, double experience, boolean enable,int numConquerPortals) throws NoSuchElementeException {
+    public void updatePlayer(String name, int energy, int currentEnergy, int level, double experience, boolean enable, int numConquerPortals) throws NoSuchElementeException {
         Player jogador = findPlayer(name);
         if (jogador == null) {
             throw new NoSuchElementeException("The requested player dont exist");
@@ -137,7 +146,7 @@ public class PlayerManagement {
             throw new InvalidTeamException("Invalid tem, teams available are GIANTS or SPARKS");
         }
         jogador.setEquipa(equipa);
-
+        
     }
 
     /**
@@ -177,8 +186,8 @@ public class PlayerManagement {
     }
 
     /**
-     * Method that return list of the playres per team first the team GIANT players,
-     * SPARKS players and then players that dont have team
+     * Method that return list of the playres per team first the team GIANT
+     * players, SPARKS players and then players that dont have team
      */
     public String listPlayerPerTeam() {
         LinkedStack<Player> teamSparks = new LinkedStack();
@@ -199,52 +208,125 @@ public class PlayerManagement {
                     break;
             }
         }
-        return ("Team GIANTS\n" + teamGiants.toString()+ "\nTeam SPARKS\n" + teamSparks.toString()+
-                "\nSem equipa\n" + noTeam.toString());
-
+        return ("Team GIANTS\n" + teamGiants.toString() + "\nTeam SPARKS\n" + teamSparks.toString()
+                + "\nSem equipa\n" + noTeam.toString());
+        
     }
-    
+
     /**
-     * Method that returns the list the players in crescent order by level 
+     * Method that returns the list the players in crescent order by level
+     *
      * @return String
      */
     public String listPlayerPerLevel() {
-       ArrayOrderedList<PriorityQueueNode<Player> >listPlayerPerLevel=new ArrayOrderedList() ;
-       Iterator iterPlayers = playersList.iterator();
-       while (iterPlayers.hasNext()) {
+        ArrayOrderedList<PriorityQueueNode<Player>> listPlayerPerLevel = new ArrayOrderedList();
+        Iterator iterPlayers = playersList.iterator();
+        while (iterPlayers.hasNext()) {
             Player jogador = (Player) iterPlayers.next();
-            PriorityQueueNode<Player> jogadorLevel= new PriorityQueueNode(jogador,jogador.getLevel());
+            PriorityQueueNode<Player> jogadorLevel = new PriorityQueueNode(jogador, jogador.getLevel());
             listPlayerPerLevel.add(jogadorLevel);
         }
         return listPlayerPerLevel.toString();
     }
-    
+
     /**
-     * Method that returns the list the players in crescent order by number of portals conquer
+     * Method that returns the list the players in crescent order by number of
+     * portals conquer
+     *
      * @return String
      */
     public String listPlayerPerConquestPortals() {
-        ArrayOrderedList<PriorityQueueNode<Player> >listPlayerPerConquestPortals=new ArrayOrderedList() ;
-       Iterator iterPlayers = playersList.iterator();
-       while (iterPlayers.hasNext()) {
+        ArrayOrderedList<PriorityQueueNode<Player>> listPlayerPerConquestPortals = new ArrayOrderedList();
+        Iterator iterPlayers = playersList.iterator();
+        while (iterPlayers.hasNext()) {
             Player jogador = (Player) iterPlayers.next();
-            PriorityQueueNode<Player> jogadorConquerPortals= new PriorityQueueNode(jogador,jogador.getNumConquerPortals());
+            PriorityQueueNode<Player> jogadorConquerPortals = new PriorityQueueNode(jogador, jogador.getNumConquerPortals());
             listPlayerPerConquestPortals.add(jogadorConquerPortals);
         }
         return listPlayerPerConquestPortals.toString();
     }
-
-    public void importJson() {
-
+    
+    public void importJson(String path) throws InvalidPathValueExeception, FileNotFoundException, IOException, ParseException {
+        if ("".equals(path)) {
+            throw new InvalidPathValueExeception("Valor inválido");
+        }
+        ArrayUnorderedList<JSONObject> playersList = new ArrayUnorderedList<>();
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(path));
+        JSONObject json = (JSONObject) obj;
+        JSONArray players = (JSONArray) json.get("Players");
+        
+        for (int i = 0; i < players.size(); i++) {
+            JSONObject player = (JSONObject) players.get(i);
+            playersList.addToRear(player);
+        }
+        for (JSONObject player : playersList) {
+            Player tempPlayer = new Player(
+                    (String) player.get("name"),
+                    getPlayerTeam((String) player.get("team")),
+                    (int) (long) player.get("currentEnergy"),
+                    (int) (long) player.get("level"),
+                    (double) (long) player.get("experiencePoints"),
+                    true);
+            this.playersList.addToRear(tempPlayer);
+        }
     }
 
-    public void exportJson() {
+    /**
+     * Convert a string to enum
+     *
+     * @param team
+     * @return
+     */
+    public Estado getPlayerTeam(String team) {
+        return switch (team) {
+            case "Sparks" ->
+                Estado.SPARKS;
+            case "Giants" ->
+                Estado.GIANTS;
+            default ->
+                Estado.NEUTRO;
+        };
+    }
+    
+    public String estadoToString(Estado team) {
+        return switch (team) {
+            case GIANTS ->
+                "Giants";
+            case SPARKS ->
+                "Sparks";
+            default ->
+                "Neutro";
+        };
+    }
+    
+    public void exportJson(String path) throws InvalidPathValueExeception, IOException {
+        if ("".equals(path)) {
+            throw new InvalidPathValueExeception("Valor inválido");
+        }
+        JSONArray playerList = new JSONArray();
+        for (Player player : this.playersList) {
+            JSONObject jsonPlayer = new JSONObject();
+            jsonPlayer.put("name", player.getName());
+            jsonPlayer.put("team", estadoToString(player.getEquipa()));
+            jsonPlayer.put("currentEnergy", player.getCurrentEnergy());
+            jsonPlayer.put("level", player.getLevel());
+            jsonPlayer.put("experiencePoints", player.getExperience());
+            playerList.add(jsonPlayer);
+        }
+        
+        JSONObject json = new JSONObject();
+        json.put("players", playerList);
+        try (FileWriter file = new FileWriter(path)) {
+            file.write(json.toJSONString());
+            file.flush();
+        }
         
     }
 
-    
     /**
-     *  Returns a string with all the information on the clients list
+     * Returns a string with all the information on the clients list
+     *
      * @return String
      */
     @Override
@@ -259,5 +341,5 @@ public class PlayerManagement {
         }
         return msg;
     }
-
+    
 }
