@@ -5,43 +5,233 @@
  */
 package Management;
 
+import Enumerations.Estado;
+import Excepcions.*;
+import Player.Player;
+import Excepcions.InvalidTeamException;
+import arrayOrderedList.ArrayOrderedList;
+import arrayunorderedlist.*;
+import java.util.Iterator;
+import linkedheap.PriorityQueueNode;
+import linkedstack.LinkedStack;
+
 /**
+ * Class used to managed the players
  *
  * @author Tiago Lopes, Rafael Dias
  */
 public class PlayerManagement {
+
+    ArrayUnorderedList<Player> playersList = new ArrayUnorderedList<Player>();
+
+    /**
+     * Empty construtor
+     */
+    public PlayerManagement() {
+
+    }
+
+    /**
+     * Method that adds a new player receiving the name
+     *
+     * @param name
+     * @throws Excepcions.InvalidNameException when alredy exits a player with
+     * that name
+     */
+    public void addPlayer(String name) throws InvalidNameException {
+        if (validateName(name)) {
+            throw new InvalidNameException("Invalid name, name alredy in use");
+        }
+        Player jogador = new Player(name);
+        playersList.addToRear(jogador);
+    }
+
+    /**
+     * Method tha checks if the name of the new player is valid
+     *
+     * @param nome
+     * @return boolean
+     */
+    private boolean validateName(String nome) {
+        Iterator iterPlayer = playersList.iterator();
+        Boolean exist = false;
+        while (iterPlayer.hasNext()) {
+            Player jogador = (Player) iterPlayer.next();
+            if (nome.equals(jogador.getName())) {
+                exist = true;
+            }
+
+        }
+        return exist;
+    }
+
+    /**
+     * Method tha turns the player disable to play
+     *
+     * @param name
+     * @throws Excepcions.NoSuchElementeException if the request element dont
+     * exist
+     */
+    public void removePlayer(String name) throws NoSuchElementeException {
+        Player jogador = findPlayer(name);
+        if (jogador == null) {
+            throw new NoSuchElementeException("The requested player dont exist");
+        }
+        jogador.setEnable(false);
+    }
+
+    /**
+     * Method to update determined atributs with changes of the player except
+     * the name and team If the received atributs is -1 tha indicates that
+     * atribut will not be change, the enable atribute receives always the
+     * boolean passed value
+     *
+     * @param name
+     * @param energy
+     * @param currentEnergy
+     * @param level
+     * @param experience
+     * @param enable
+     * @param numConquerPortals
+     * @throws Excepcions.NoSuchElementeException if the request element dont
+     * exist
+     */
+    public void updatePlayer(String name, int energy, int currentEnergy, int level, double experience, boolean enable,int numConquerPortals) throws NoSuchElementeException {
+        Player jogador = findPlayer(name);
+        if (jogador == null) {
+            throw new NoSuchElementeException("The requested player dont exist");
+        }
+        if (energy > -1) {
+            jogador.setEnergy(energy);
+        }
+        if (currentEnergy > -1) {
+            jogador.setCurrentEnergy(currentEnergy);
+        }
+        if (level > -1) {
+            jogador.setLevel(level);
+        }
+        if (experience > -1) {
+            jogador.setExperience(experience);
+        }
+        jogador.setEnable(enable);
+        if (numConquerPortals > -1) {
+            jogador.setNumConquerPortals(numConquerPortals);
+        }
+    }
+
+    /**
+     * Method thats adds the team to the requested player by name
+     *
+     * @param nome
+     * @param equipa
+     * @throws Excepcions.InvalidTeamException if the team is invalid
+     * @throws Excepcions.NoSuchElementeException if the request element dont
+     * exist
+     */
+    public void addTeam(String nome, Estado equipa) throws InvalidTeamException, NoSuchElementeException {
+        Player jogador = findPlayer(nome);
+        if (jogador == null) {
+            throw new NoSuchElementeException("The requested player dont exist");
+        }
+        if (!equipa.equals(Estado.GIANTS) && !equipa.equals(Estado.SPARKS)) {
+            throw new InvalidTeamException("Invalid tem, teams available are GIANTS or SPARKS");
+        }
+        jogador.setEquipa(equipa);
+
+    }
+
+    /**
+     * Find and returns the player with the requestes name or null if dont find
+     *
+     * @param name
+     * @return Player
+     */
+    public Player findPlayer(String name) {
+        Iterator iter = playersList.iterator();
+        Player jogador;
+        while (iter.hasNext()) {
+            jogador = (Player) iter.next();
+            if (name.equals(jogador.getName())) {
+                return jogador;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Method that removes the team to the requested player by name
+     *
+     * @param name
+     * @throws Excepcions.NoSuchElementeException if the request element dont
+     * exist
+     */
+    public void removeTeam(String name) throws NoSuchElementeException {
+        Player jogador = findPlayer(name);
+        if (jogador == null) {
+            throw new NoSuchElementeException("The requested player dont exist");
+        }
+        if (jogador.getEquipa() == null) {
+            throw new NoSuchElementeException("The requested player dont had team to remove");
+        }
+        jogador.setEquipa(Estado.NEUTRO);
+    }
+
+    /**
+     * Method that return list of the playres per team first the team GIANT players,
+     * SPARKS players and then players that dont have team
+     */
+    public String listPlayerPerTeam() {
+        LinkedStack<Player> teamSparks = new LinkedStack();
+        LinkedStack<Player> teamGiants = new LinkedStack();
+        LinkedStack<Player> noTeam = new LinkedStack();
+        Iterator iterPlayer = playersList.iterator();
+        while (iterPlayer.hasNext()) {
+            Player jogador = (Player) iterPlayer.next();
+            switch (jogador.getEquipa()) {
+                case SPARKS:
+                    teamSparks.push(jogador);
+                    break;
+                case GIANTS:
+                    teamGiants.push(jogador);
+                    break;
+                default:
+                    noTeam.push(jogador);
+                    break;
+            }
+        }
+        return ("Team GIANTS\n" + teamGiants.toString()+ "\nTeam SPARKS\n" + teamSparks.toString()+
+                "\nSem equipa\n" + noTeam.toString());
+
+    }
     
-
-    public void addPlayer() {
-
+    /**
+     * Method that returns the list the players in crescent order by level 
+     * @return String
+     */
+    public String listPlayerPerLevel() {
+       ArrayOrderedList<PriorityQueueNode<Player> >listPlayerPerLevel=new ArrayOrderedList() ;
+       Iterator iterPlayers = playersList.iterator();
+       while (iterPlayers.hasNext()) {
+            Player jogador = (Player) iterPlayers.next();
+            PriorityQueueNode<Player> jogadorLevel= new PriorityQueueNode(jogador,jogador.getLevel());
+            listPlayerPerLevel.add(jogadorLevel);
+        }
+        return listPlayerPerLevel.toString();
     }
-
-    public void removePlayer() {
-
-    }
-
-    public void updatePlayer() {
-
-    }
-
-    public void addTeam() {
-
-    }
-
-    public void removeTeam() {
-
-    }
-
-    public void listPlayerPerTeam() {
-
-    }
-
-    public void listPlayerPerLevel() {
-
-    }
-
-    public void listPlayerPerConquestPortals() {
-
+    
+    /**
+     * Method that returns the list the players in crescent order by number of portals conquer
+     * @return String
+     */
+    public String listPlayerPerConquestPortals() {
+        ArrayOrderedList<PriorityQueueNode<Player> >listPlayerPerConquestPortals=new ArrayOrderedList() ;
+       Iterator iterPlayers = playersList.iterator();
+       while (iterPlayers.hasNext()) {
+            Player jogador = (Player) iterPlayers.next();
+            PriorityQueueNode<Player> jogadorConquerPortals= new PriorityQueueNode(jogador,jogador.getNumConquerPortals());
+            listPlayerPerConquestPortals.add(jogadorConquerPortals);
+        }
+        return listPlayerPerConquestPortals.toString();
     }
 
     public void importJson() {
@@ -49,7 +239,25 @@ public class PlayerManagement {
     }
 
     public void exportJson() {
+        
+    }
 
+    
+    /**
+     *  Returns a string with all the information on the clients list
+     * @return String
+     */
+    @Override
+    public String toString() {
+        Iterator iterPlayers = playersList.iterator();
+        String msg = "Lista de jogadores";
+        while (iterPlayers.hasNext()) {
+            Player jogador = (Player) iterPlayers.next();
+            if (jogador.getEnable()) {
+                msg += "\n" + jogador.toString();
+            }
+        }
+        return msg;
     }
 
 }

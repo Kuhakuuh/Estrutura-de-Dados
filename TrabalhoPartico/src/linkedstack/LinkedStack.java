@@ -108,6 +108,7 @@ public class LinkedStack<T> implements StackADT<T> {
     
     @Override
     public String toString() {
+        /**
         String output = "";
         
         output += "Number of elements: " + this.size();
@@ -120,6 +121,14 @@ public class LinkedStack<T> implements StackADT<T> {
         }
         
         return output;
+        */
+        String string="";
+        LinearNode<T> current=top;
+        while(current!=null){
+            string+=" "+current.getElement();
+            current=current.getNext();
+        }
+        return string;
     }
     
 }

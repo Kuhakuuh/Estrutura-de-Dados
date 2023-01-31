@@ -10,6 +10,7 @@ import Locals.Connectors;
 import Locals.Local;
 import Locals.Portal;
 import Management.LocalManagement;
+import Management.PlayerManagement;
 import Management.RouteManagement;
 import Player.Player;
 import java.io.FileNotFoundException;
@@ -112,11 +113,38 @@ public class TrabalhoPartico {
         rm.importRoute("src/exemplo(1).json");
         lm.listPortals();
         lm.listConnectors();
+
         lm.exportJson("src/locals.json");
         rm.exportRoute("src/routes.json");
         System.out.println(lm.getMap().toString());
         System.out.println(lm.getMap().shortestPathWeight(portal4, portal1));
 
+
+        //lm.importJson();
+
+        Iterator iter = lm.getMap().iteratorShortestPath(portal1, portal4);
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+
+        lm.exportJson("C:\\Users\\Tiago Lopes\\Documents\\TrabalhoEd\\TrabalhoPartico\\src\\test.json");
+        
+        PlayerManagement pm = new PlayerManagement();
+        pm.addPlayer("Raickou");
+        pm.addPlayer("Elafar");
+        pm.addTeam("Elafar", Estado.SPARKS);
+        System.out.println(pm.toString());
+        pm.addTeam("Raickou", Estado.GIANTS);
+        pm.addPlayer("P3");
+        pm.updatePlayer("Raickou", -1, -1, 3, -1, true,2);
+        pm.updatePlayer("Elafar", -1, -1, 4, -1, true,6);
+        pm.updatePlayer("P3", -1, -1, 1, -1, true,3);
+        System.out.println(pm.toString());
+        System.out.println("\nLista de jogadores ordenados de forma crescente pelo level"+pm.listPlayerPerLevel());
+        System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados"+ pm.listPlayerPerConquestPortals());
+
+        lm.exportJson("src/test.json");
+        
     }
 
 }

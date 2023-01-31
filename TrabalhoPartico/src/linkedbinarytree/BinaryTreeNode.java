@@ -12,6 +12,7 @@ package linkedbinarytree;
 /**
  * BinaryTreeNode represents a node in a binary tree with a left and right
  * child.
+ * @param <T>
  */
 public class BinaryTreeNode<T> {
 
@@ -21,7 +22,7 @@ public class BinaryTreeNode<T> {
     /**
      * Creates a new tree node with the specified data.
      *
-     * @param obj the element that will become a part of the new tree node
+     * @param element the element that will become a part of the new tree node
      */
     public BinaryTreeNode(T element) {
         this.element = element;
