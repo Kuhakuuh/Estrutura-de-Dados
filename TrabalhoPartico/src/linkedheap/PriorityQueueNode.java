@@ -62,7 +62,7 @@ public class PriorityQueueNode<T> implements Comparable<PriorityQueueNode> {
      *
      */
     public String toString() {
-        String temp = (this.element.toString() + this.priority + this.order);
+        String temp = (this.element.toString());
         return temp;
     }
 
