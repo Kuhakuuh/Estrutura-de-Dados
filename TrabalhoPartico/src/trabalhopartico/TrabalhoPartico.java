@@ -7,7 +7,6 @@ package trabalhopartico;
 
 import Enumerations.Estado;
 import Locals.Connectors;
-import Locals.Local;
 import Locals.Portal;
 import Management.LocalManagement;
 import Management.PlayerManagement;
@@ -17,7 +16,6 @@ import Player.Player;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Iterator;
-import network.Network;
 
 /**
  *
