@@ -63,6 +63,25 @@ public class Player implements Comparable{
         this.enable = enable;
         this.numConquerPortals=numConquerPortals;
     }
+    /**
+     * Construtor for import
+     * @param name
+     * @param equipa
+     * @param currentEnergy
+     * @param level
+     * @param experience
+     * @param enable
+     * @param numConquerPortals 
+     */
+    public Player(String name, Estado equipa, int currentEnergy, int level, double experience, boolean enable) {
+        this.name = name;
+        this.equipa = equipa;
+        this.currentEnergy = currentEnergy;
+        this.level = level;
+        this.experience = experience;
+        this.enable = enable;
+        
+    }
     
     
     /**

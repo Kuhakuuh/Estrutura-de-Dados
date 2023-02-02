@@ -371,4 +371,12 @@ public class MatrixGraph<T> implements GraphADT<T> {
 
     }
 
+    public T[] getVertices() {
+        return vertices;
+    }
+
+    public void setVertices(T[] vertices) {
+        this.vertices = vertices;
+    }
+
 }
