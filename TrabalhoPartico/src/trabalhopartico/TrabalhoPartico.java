@@ -126,8 +126,9 @@ public class TrabalhoPartico {
 
         //lm.importJson();
         System.out.println("-----Caminho mas curto------");
-        Iterator iter = lm.getMap().iteratorShortestPath(portal1, portal4);
+        Iterator iter = lm.getMap().iteratorShortestPath(portal2, c1);
         while (iter.hasNext()) {
+            
             System.out.println("Ponto:" + iter.next());
         }
 
@@ -148,16 +149,19 @@ public class TrabalhoPartico {
         System.out.println(pm.toString());
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo level" + pm.listPlayerPerLevel());
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados" + pm.listPlayerPerConquestPortals());
-
-
-        lm.exportJson("src/test.json");
-        
+        System.out.println(lm.getMap().toString());
         GameManagement gm = new GameManagement(lm.getMap());
         System.out.println("\n\nShort Path\n\n");
         System.out.println(gm.calculateShortestPathBeetweenTwoPoints(portal2,c1));
         
+        
         System.out.println("\n\nShort Path2\n\n");
         System.out.println(gm.calculateShortestPathOnlyThrowPortalsorConnectors(portal2,portal3));
+        
+        
+        
+        
+        
         
         
     }
