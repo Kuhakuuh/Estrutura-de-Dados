@@ -5,6 +5,7 @@
  */
 package interfaceGrafica;
 
+import Management.LocalManagement;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,6 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class NewJFrame extends javax.swing.JFrame {
 
+    LocalManagement lm = new LocalManagement();
+    
     ImageIcon imagem = new ImageIcon("src/interfaceGrafica/GiantsTeam.png");
     ImageIcon imagem2 = new ImageIcon("src/interfaceGrafica/sparks.png");
     ImageIcon imagem3 = new ImageIcon("src/interfaceGrafica/portal.png");
