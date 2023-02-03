@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package trabalhopartico;
+package interfaceGrafica;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -14,12 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author Rafael
  */
-public class Teste extends javax.swing.JFrame {
+public class LaunchGame extends javax.swing.JFrame {
 
     /**
      * Creates new form Teste
      */
-    public Teste() {
+    public LaunchGame() {
         initComponents();
     }
 
@@ -48,6 +48,7 @@ public class Teste extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WorldConquers");
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -69,7 +70,7 @@ public class Teste extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnStart);
-        btnStart.setBounds(130, 150, 90, 40);
+        btnStart.setBounds(130, 150, 100, 40);
 
         btnAdminTools.setText("Admin tools");
         btnAdminTools.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +91,8 @@ public class Teste extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-        new GameStartMenu().setVisible(true);
+        new StartGame().setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnStartActionPerformed
 
     /**
@@ -110,13 +112,13 @@ public class Teste extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Teste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaunchGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Teste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaunchGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Teste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaunchGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Teste.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LaunchGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -124,8 +126,7 @@ public class Teste extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Teste menuPrincipal = new Teste();
-                new Teste().setVisible(true);
+                new LaunchGame().setVisible(true);
             }
         });
     }
