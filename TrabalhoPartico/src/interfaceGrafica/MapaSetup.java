@@ -7,23 +7,36 @@ package interfaceGrafica;
 
 import Locals.Mapa;
 import Management.LocalManagement;
+import Management.PlayerManagement;
 import Management.RouteManagement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  */
 public class MapaSetup extends javax.swing.JFrame {
     
+    PlayerManagement pm = new PlayerManagement();
     LocalManagement lm = new LocalManagement();
-
+    ImageIcon imagemMapa = new ImageIcon("src/interfaceGrafica/mapBackground.jpg");
+    
+    
     /**
      * Creates new form MapaFrame
      */
     public MapaSetup() {
         initComponents();
+    }
+    
+    public void setPM(PlayerManagement pm){
+        this.pm=pm;
+    }
+    
+    public void setLM(LocalManagement lm){
+        this.lm=lm;
     }
 
     /**
@@ -39,9 +52,22 @@ public class MapaSetup extends javax.swing.JFrame {
         createMap = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         display = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        mapaImagem = new javax.swing.JLabel();
+        btnStart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         importMap.setText("Import Map");
         importMap.addActionListener(new java.awt.event.ActionListener() {
@@ -59,45 +85,58 @@ public class MapaSetup extends javax.swing.JFrame {
 
         display.setColumns(20);
         display.setRows(5);
+        display.setEnabled(false);
         jScrollPane1.setViewportView(display);
 
-        jLabel1.setText("Output");
+        btnStart.setText("Start");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(399, 399, 399)
-                .addComponent(importMap)
-                .addGap(140, 140, 140)
-                .addComponent(createMap)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(importMap)
+                                .addGap(140, 140, 140)
+                                .addComponent(createMap))
+                            .addComponent(mapaImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(183, 183, 183))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(mapaImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(createMap)
                             .addComponent(importMap))
-                        .addGap(245, 245, 245))))
+                        .addGap(58, 58, 58)
+                        .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(141, 141, 141))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void importMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importMapActionPerformed
@@ -111,9 +150,8 @@ public class MapaSetup extends javax.swing.JFrame {
             
             PlayerSetup player = new PlayerSetup();
             player.setMapa(lm.getMap());
-            player.setVisible(true);
-            dispose();
             
+            btnStart.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(MapaSetup.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -124,10 +162,38 @@ public class MapaSetup extends javax.swing.JFrame {
         lm.setMap(mapa);
     }
     private void createMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createMapActionPerformed
+        btnStart.setVisible(true);
+        importMap.enable(false);
         new CreatMap().setVisible(true);
         dispose();
 
     }//GEN-LAST:event_createMapActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        imagemMapa.setImage(imagemMapa.getImage().getScaledInstance(
+                mapaImagem.getWidth(), 
+                mapaImagem.getHeight(), 
+                1));
+        mapaImagem.setIcon(imagemMapa);
+        btnStart.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        // TODO add your handling code here:
+        Game game = new Game();
+        game.setLM(lm);
+        game.setPM(pm);
+        game.setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_btnStartActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        display.setText("");
+        display.setText(lm.getMap().toString());
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -166,10 +232,11 @@ public class MapaSetup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnStart;
     private javax.swing.JButton createMap;
     private javax.swing.JTextArea display;
     private javax.swing.JButton importMap;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel mapaImagem;
     // End of variables declaration//GEN-END:variables
 }

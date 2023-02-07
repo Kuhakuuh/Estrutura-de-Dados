@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Rafael
+ * @author Tiago Lopes, Rafael Dias
  */
 public class LaunchGame extends javax.swing.JFrame {
 

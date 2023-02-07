@@ -32,6 +32,10 @@ public class CreatMap extends javax.swing.JFrame {
     public CreatMap() {
         initComponents();
     }
+    
+    public void updateMap(Mapa map){
+        lm.setMap(map);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -273,6 +277,7 @@ public class CreatMap extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
         MapaSetup mapaSetup = new MapaSetup();
+        mapaSetup.setLM(lm);
         mapaSetup.setVisible(true);
         dispose();
         

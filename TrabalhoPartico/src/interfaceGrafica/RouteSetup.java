@@ -16,7 +16,7 @@ import trabalhopartico.CalculateDistance;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  */
 public class RouteSetup extends javax.swing.JFrame {
 
@@ -148,6 +148,7 @@ public class RouteSetup extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public void setMapa(Mapa map) {
         this.map = map;
@@ -179,6 +180,7 @@ public class RouteSetup extends javax.swing.JFrame {
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
         CreatMap cmap = new CreatMap();
+        cmap.updateMap(map);
         cmap.setVisible(true);
         dispose();
     }//GEN-LAST:event_backActionPerformed

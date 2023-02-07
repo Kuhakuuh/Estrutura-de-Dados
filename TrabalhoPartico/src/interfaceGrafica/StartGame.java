@@ -7,7 +7,7 @@ package interfaceGrafica;
 
 /**
  *
- * @author Rafael
+ * @author Tiago Lopes, Rafael Dias
  */
 public class StartGame extends javax.swing.JFrame {
 

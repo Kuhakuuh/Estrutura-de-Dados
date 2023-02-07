@@ -18,7 +18,7 @@ import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author Tiago Lopes
+ * @author Tiago Lopes, Rafael Dias
  */
 public class PlayerSetup extends javax.swing.JFrame {
 
@@ -30,11 +30,11 @@ public class PlayerSetup extends javax.swing.JFrame {
     ImageIcon imagemDwarf = new ImageIcon("src/interfaceGrafica/dwarf.png");
     ImageIcon imagemHuman = new ImageIcon("src/interfaceGrafica/human.png");
     ImageIcon imagemOrc = new ImageIcon("src/interfaceGrafica/orc.png");
+    int count = 0;
 
     /**
      * Creates new form addPlayer
      *
-     * @param map
      */
     public PlayerSetup() {
         initComponents();
@@ -60,14 +60,20 @@ public class PlayerSetup extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         importPlayers = new javax.swing.JButton();
         output = new java.awt.TextArea();
-        addRoutes = new javax.swing.JButton();
+        btnConfirmPlayers = new javax.swing.JButton();
         addPlayer = new javax.swing.JButton();
         teamValue = new javax.swing.JLabel();
+        lbnp = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Players");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Name:");
 
@@ -109,10 +115,16 @@ public class PlayerSetup extends javax.swing.JFrame {
             }
         });
 
-        addRoutes.setText("routes");
-        addRoutes.addActionListener(new java.awt.event.ActionListener() {
+        output.addTextListener(new java.awt.event.TextListener() {
+            public void textValueChanged(java.awt.event.TextEvent evt) {
+                outputTextValueChanged(evt);
+            }
+        });
+
+        btnConfirmPlayers.setText("Confirm Players");
+        btnConfirmPlayers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addRoutesActionPerformed(evt);
+                btnConfirmPlayersActionPerformed(evt);
             }
         });
 
@@ -123,6 +135,8 @@ public class PlayerSetup extends javax.swing.JFrame {
             }
         });
 
+        lbnp.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,16 +144,18 @@ public class PlayerSetup extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(back)
                         .addGap(213, 213, 213)
                         .addComponent(importPlayers)
                         .addGap(90, 90, 90)
-                        .addComponent(addRoutes))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel4)))
-                .addGap(202, 515, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnConfirmPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbnp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(202, 471, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -195,11 +211,13 @@ public class PlayerSetup extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(86, 86, 86)
                         .addComponent(output, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(lbnp, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(back)
                     .addComponent(importPlayers)
-                    .addComponent(addRoutes))
+                    .addComponent(btnConfirmPlayers))
                 .addGap(39, 39, 39))
         );
 
@@ -248,20 +266,29 @@ public class PlayerSetup extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_importPlayersActionPerformed
 
-    private void addRoutesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoutesActionPerformed
-        RouteSetup routes = new RouteSetup();
-        routes.setMapa(map);
-        routes.setVisible(true);
-        dispose();
+    private void btnConfirmPlayersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmPlayersActionPerformed
+        if (pm.numbPlayers() >= 2) {
+            MapaSetup mapa = new MapaSetup();
+            mapa.setPM(pm);
+            mapa.setVisible(true);
+            dispose();
+        }else{
+            new Error().ErrorMessage("Número de jogadores inválido");
+        }
 
-    }//GEN-LAST:event_addRoutesActionPerformed
+
+    }//GEN-LAST:event_btnConfirmPlayersActionPerformed
 
 
     private void addPlayerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPlayerActionPerformed
+
         try {
             pm.addPlayer(name.getText());
             pm.findPlayer(name.getText()).setEquipa(pm.getPlayerTeam(teamValue.getText()));
             output.setText(pm.listPlayerPerLevel());
+            count++;
+            lbnp.setText(String.valueOf(count));
+            name.setText("");
         } catch (InvalidNameException ex) {
             Logger.getLogger(PlayerSetup.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -273,6 +300,14 @@ public class PlayerSetup extends javax.swing.JFrame {
         new StartGame().setVisible(true);
         dispose();
     }//GEN-LAST:event_backActionPerformed
+
+    private void outputTextValueChanged(java.awt.event.TextEvent evt) {//GEN-FIRST:event_outputTextValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_outputTextValueChanged
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -312,14 +347,15 @@ public class PlayerSetup extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPlayer;
-    private javax.swing.JButton addRoutes;
     private javax.swing.JButton back;
+    private javax.swing.JButton btnConfirmPlayers;
     private javax.swing.JButton giants;
     private javax.swing.JButton importPlayers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lbnp;
     private javax.swing.JTextField name;
     private java.awt.TextArea output;
     private javax.swing.JButton sparks;

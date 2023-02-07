@@ -40,7 +40,23 @@ public class PlayerManagement {
     public PlayerManagement() {
 
     }
-
+    
+    /**
+     *  Method that return the list of players
+     * @return ArrayUnorderedList of type Player
+     */
+    public ArrayUnorderedList<Player> getPlayerList(){
+        return playersList;
+    }
+    
+    /**
+     * Method tha returns the number of players
+     * @return int
+     */
+    public int numbPlayers(){
+        return playersList.size();
+    }
+    
     /**
      * Method that adds a new player receiving the name
      *
