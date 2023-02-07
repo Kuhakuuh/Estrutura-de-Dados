@@ -12,6 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/interfaceGrafica/LaunchGame.java</file>
             <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/interfaceGrafica/Error.java</file>
             <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/interfaceGrafica/Board.java</file>
@@ -26,6 +27,13 @@
             <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/interfaceGrafica/RouteSetup.java</file>
             <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/interfaceGrafica/NewJFrame.java</file>
             <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/interfaceGrafica/StartGame.java</file>
+=======
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/locals.json</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/interfaceGrafica/Game.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/Management/PlayerManagement.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/interfaceGrafica/MapaSetup.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/arrayOrderedList/ArrayCircularQueue.java</file>
+>>>>>>> 40761486cdf859999c2735126fd36ccd687dacdf
         </group>
     </open-files>
 </project-private>

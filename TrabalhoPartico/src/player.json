@@ -1,21 +1,36 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 40761486cdf859999c2735126fd36ccd687dacdf
 {
     "Players": [{
             "level": 3,
             "name": "Raickou",
+<<<<<<< HEAD
             "experiencePoints": 0,
+=======
+            "experiencePoints": 5433,
+>>>>>>> 40761486cdf859999c2735126fd36ccd687dacdf
             "currentEnergy": 50,
             "team": "Giants"
         }, {
             "level": 4,
             "name": "Elafar",
+<<<<<<< HEAD
             "experiencePoints": 0,
+=======
+            "experiencePoints": 543234,
+>>>>>>> 40761486cdf859999c2735126fd36ccd687dacdf
             "currentEnergy": 50,
             "team": "Sparks"
         }, {
             "level": 1,
             "name": "P3",
+<<<<<<< HEAD
             "experiencePoints": 0,
+=======
+            "experiencePoints": 12353,
+>>>>>>> 40761486cdf859999c2735126fd36ccd687dacdf
             "currentEnergy": 50,
             "team": "Neutro"
         }, {
@@ -25,5 +40,9 @@
             "currentEnergy": 70,
             "team": "Sparks"
         }]
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 40761486cdf859999c2735126fd36ccd687dacdf
