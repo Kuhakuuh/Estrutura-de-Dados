@@ -199,7 +199,7 @@ public class GameManagement {
     /**
      * Export all shortest path to a json file
      *
-     * @return 
+     * @return
      * @throws IOException
      */
     public JSONObject exportShortsPaths() throws IOException {
@@ -235,16 +235,7 @@ public class GameManagement {
         shortest.put("ShortestPath", shortestPathNormal);
         shortest.put("ShortestPathPortal", shortestPathPortalsJson);
         shortest.put("ShortestPathConnector", shortestPathConnectorssJson);
- 
+
         return shortest;
     }
-
-    public void exportGameSettings() {
-
-    }
-
-    public void importGameSettings() {
-
-    }
-
 }

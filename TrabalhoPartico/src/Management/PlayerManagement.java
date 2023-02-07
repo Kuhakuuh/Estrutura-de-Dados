@@ -14,7 +14,6 @@ import arrayunorderedlist.*;
 import execeptions.InvalidPathValueExeception;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import linkedheap.PriorityQueueNode;
@@ -105,7 +104,7 @@ public class PlayerManagement {
      * @throws Excepcions.NoSuchElementeException if the request element dont
      * exist
      */
-    public void updatePlayer(String name, int energy, int currentEnergy, int level,long experience, boolean enable, int numConquerPortals) throws NoSuchElementeException {
+    public void updatePlayer(String name, int energy, int currentEnergy, int level, long experience, boolean enable, int numConquerPortals) throws NoSuchElementeException {
         Player jogador = findPlayer(name);
         if (jogador == null) {
             throw new NoSuchElementeException("The requested player dont exist");

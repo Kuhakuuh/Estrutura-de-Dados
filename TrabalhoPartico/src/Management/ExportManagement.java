@@ -25,10 +25,11 @@ public class ExportManagement {
 
     /**
      * Construtor do Export
+     *
      * @param localManagement
      * @param playerManagement
      * @param routeManagement
-     * @param gameManagement 
+     * @param gameManagement
      */
     public ExportManagement(LocalManagement localManagement, PlayerManagement playerManagement, RouteManagement routeManagement, GameManagement gameManagement) {
         this.lm = localManagement;
@@ -37,11 +38,13 @@ public class ExportManagement {
         this.gm = gameManagement;
 
     }
+
     /**
      * Export to a json file with all information about the game
+     *
      * @param path
      * @throws IOException
-     * @throws InvalidPathValueExeception 
+     * @throws InvalidPathValueExeception
      */
     public void exportData(String path) throws IOException, InvalidPathValueExeception {
         if ("".equals(path)) {

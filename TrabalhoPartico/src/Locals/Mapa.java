@@ -19,7 +19,7 @@ import network.Network;
  * @author Tiago Lopes, Rafael Dias
  * @param <T>
  */
-public class Mapa<T> extends Network<T>{
+public class Mapa<T> extends Network<T> {
 
     public Mapa() {
         super();
@@ -81,8 +81,7 @@ public class Mapa<T> extends Network<T>{
         return null;
     }
 
-    
-   public Iterator<Integer> iteratorShortestPathIndices(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException {
+    public Iterator<Integer> iteratorShortestPathIndices(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException {
         int index;
         double weight;
         int[] predecessor = new int[numberVertices];
