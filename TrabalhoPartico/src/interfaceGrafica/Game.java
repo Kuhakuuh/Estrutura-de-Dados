@@ -5,12 +5,15 @@
  */
 package interfaceGrafica;
 
-
-
+import Locals.*;
+import Enumerations.*;
 import Management.LocalManagement;
 import Management.PlayerManagement;
 import Player.Player;
+import arrayOrderedList.ArrayCircularQueue;
+import arrayunorderedlist.ArrayUnorderedList;
 import arrayunorderedlist.EmptyCollectionException;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -21,25 +24,26 @@ import javax.swing.ImageIcon;
  */
 public class Game extends javax.swing.JFrame {
 
-    boolean exitFlag=false;
+    boolean exitFlag = false;
     LocalManagement lm = new LocalManagement();
     PlayerManagement pm = new PlayerManagement();
     ImageIcon playerImage = new ImageIcon("src/interfaceGrafica/player.png");
-    Player currentPlayer;
-    
+    Player currentPlayer = new Player();
+    ArrayCircularQueue listaJogadores = new ArrayCircularQueue();
+
     /**
      * Creates new form Game
      */
     public Game() {
         initComponents();
     }
-    
-    public void setPM(PlayerManagement pm){
-        this.pm=pm;
+
+    public void setPM(PlayerManagement pm) {
+        this.pm = pm;
     }
-    
-    public void setLM(LocalManagement lm){
-        this.lm=lm;
+
+    public void setLM(LocalManagement lm) {
+        this.lm = lm;
     }
 
     /**
@@ -70,7 +74,8 @@ public class Game extends javax.swing.JFrame {
         btnRecarregar = new javax.swing.JToggleButton();
         btnConquistar = new javax.swing.JToggleButton();
         btnFortalecer = new javax.swing.JToggleButton();
-        displayMap = new java.awt.TextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        displayMap = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("In Game");
@@ -131,37 +136,40 @@ public class Game extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbExpPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(lbLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbExpPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbCurrentEnergy, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(48, 48, 48)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbExpPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lbLevel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                            .addComponent(lbExpPoints, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                             .addComponent(lbCurrentEnergy, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -202,12 +210,10 @@ public class Game extends javax.swing.JFrame {
             }
         });
 
+        displayMap.setColumns(20);
+        displayMap.setRows(5);
         displayMap.setEnabled(false);
-        displayMap.addTextListener(new java.awt.event.TextListener() {
-            public void textValueChanged(java.awt.event.TextEvent evt) {
-                displayMapTextValueChanged(evt);
-            }
-        });
+        jScrollPane1.setViewportView(displayMap);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,20 +223,7 @@ public class Game extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
-                        .addComponent(PlayerImage, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 95, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnMover, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRecarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnFortalecer, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnConquistar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -238,18 +231,31 @@ public class Game extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbLocalEnergy, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(lbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnMover, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRecarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnFortalecer, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnConquistar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(displayMap, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                        .addComponent(PlayerImage, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PlayerImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PlayerImage, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -266,10 +272,9 @@ public class Game extends javax.swing.JFrame {
                             .addComponent(btnRecarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnConquistar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFortalecer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 111, Short.MAX_VALUE))
-                    .addComponent(displayMap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(btnFortalecer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -278,37 +283,117 @@ public class Game extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        btnFortalecer.setVisible(false);
+        btnConquistar.setVisible(false);
+        btnRecarregar.setVisible(false);
+
         playerImage.setImage(playerImage.getImage().getScaledInstance(
-                PlayerImage.getWidth(), 
-                PlayerImage.getHeight(), 
+                PlayerImage.getWidth(),
+                PlayerImage.getHeight(),
                 1));
         PlayerImage.setIcon(playerImage);
         displayMap.setText(lm.getMap().toString());
-        
-        while(!exitFlag){
-            
+
+        ArrayUnorderedList<Player> playersList = pm.getPlayerList();
+        Iterator iter = playersList.iterator();
+        while (iter.hasNext()) {
+            Player aux = (Player) iter.next();
+            listaJogadores.enqueue(aux);
         }
+        try {
+            currentPlayer = (Player) listaJogadores.dequeue();
+        } catch (Excepcions.EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listaJogadores.enqueue(currentPlayer);
+        gameturns();
+
     }//GEN-LAST:event_formWindowOpened
+
+    private void nextPlayerTurn() throws Excepcions.EmptyCollectionException {
+        currentPlayer = (Player) listaJogadores.dequeue();
+        listaJogadores.enqueue(currentPlayer);
+    }
+
+    private boolean sameTeamPortal() {
+        boolean same = false;
+        Estado teamPlayer = currentPlayer.getEquipa();
+        Portal portal = (Portal) currentPlayer.getPosition();
+        Estado teamPortal = portal.getJogador().getEquipa();
+        if (teamPlayer == teamPortal) {
+            same = true;
+        }
+        return same;
+    }
+
+    private void positionActions() {
+        Local position = currentPlayer.getPosition();
+        if (position.getClass() == Portal.class) {
+            if (sameTeamPortal()) {
+                btnFortalecer.setVisible(true);
+            } else {
+                btnConquistar.setVisible(true);
+            }
+
+        } else if (position.getClass() == Connectors.class) {
+            btnRecarregar.setVisible(true);
+        }
+    }
+
+    private void gameturns() {
+
+        if (!exitFlag) {
+            lbPlayer.setText(currentPlayer.getName());
+            lbLevel.setText(String.valueOf(currentPlayer.getLevel()));
+            lbExpPoints.setText(String.valueOf(currentPlayer.getExperience()));
+            lbCurrentEnergy.setText(String.valueOf(currentPlayer.getCurrentEnergy()));
+            lbPosition.setText(String.valueOf(currentPlayer.getPosition().getId()));
+            lbLocalEnergy.setText(String.valueOf(currentPlayer.getPosition().getEnergyAmount()));
+        } else {
+            dispose();
+        }
+    }
+
 
     private void btnMoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoverActionPerformed
         // TODO add your handling code here:
+        try {
+            nextPlayerTurn();
+        } catch (Excepcions.EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        gameturns();
     }//GEN-LAST:event_btnMoverActionPerformed
 
     private void btnRecarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecarregarActionPerformed
         // TODO add your handling code here:
+        try {
+            nextPlayerTurn();
+        } catch (Excepcions.EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        gameturns();
     }//GEN-LAST:event_btnRecarregarActionPerformed
 
     private void btnConquistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConquistarActionPerformed
         // TODO add your handling code here:
+        try {
+            nextPlayerTurn();
+        } catch (Excepcions.EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        gameturns();
     }//GEN-LAST:event_btnConquistarActionPerformed
 
     private void btnFortalecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFortalecerActionPerformed
         // TODO add your handling code here:
+        try {
+            nextPlayerTurn();
+        } catch (Excepcions.EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        gameturns();
     }//GEN-LAST:event_btnFortalecerActionPerformed
-
-    private void displayMapTextValueChanged(java.awt.event.TextEvent evt) {//GEN-FIRST:event_displayMapTextValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_displayMapTextValueChanged
 
     /**
      * @param args the command line arguments
@@ -351,7 +436,7 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnFortalecer;
     private javax.swing.JToggleButton btnMover;
     private javax.swing.JToggleButton btnRecarregar;
-    private java.awt.TextArea displayMap;
+    private javax.swing.JTextArea displayMap;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -360,6 +445,7 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCurrentEnergy;
     private javax.swing.JLabel lbExpPoints;
     private javax.swing.JLabel lbLevel;

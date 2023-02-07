@@ -1,1 +1,95 @@
-{"locals":[{"gameSettings":{"ownership":{"player":"Kuuhaku Sensei"},"energy":150},"name":"Ionia","coordinates":{"latitude":35.432542,"longitude":-44.973748},"id":110,"type":"Portal"},{"gameSettings":{"ownership":{"player":"Raickou"},"energy":140},"name":"Demacia","coordinates":{"latitude":90.432542,"longitude":-32.973748},"id":112,"type":"Portal"},{"gameSettings":{"ownership":{"player":"Kuuhaku Sensei"},"energy":130},"name":"Piltover","coordinates":{"latitude":67.432542,"longitude":-42.973748},"id":113,"type":"Portal"},{"gameSettings":{"ownership":{"player":"Raickou"},"energy":120},"name":"Noxus","coordinates":{"latitude":91.432542,"longitude":-13.973748},"id":114,"type":"Portal"},{"gameSettings":{"ownership":{"player":"LoboMau"},"energy":180},"name":"Jacqueline Kennedy Onassis Reservoir","coordinates":{"latitude":40.7656918,"longitude":-73.9737489},"id":1414,"type":"Portal"},{"gameSettings":{"cooldown":5000,"energy":140},"coordinates":{"latitude":-53.2314,"longitude":0.0},"id":111,"type":"Connector"},{"gameSettings":{"cooldown":3,"energy":110},"coordinates":{"latitude":40.7697989,"longitude":-73.9723702},"id":5212,"type":"Connector"}]}
+{
+    "locals": [{
+            "gameSettings": {
+                "ownership": {
+                    "player": "Kuuhaku Sensei"
+                },
+                "energy": 150
+            },
+            "name": "Ionia",
+            "coordinates": {
+                "latitude": 35.432542,
+                "longitude": -44.973748
+            },
+            "id": 110,
+            "type": "Portal"
+        }, {
+            "gameSettings": {
+                "ownership": {
+                    "player": "Raickou"
+                },
+                "energy": 140
+            },
+            "name": "Demacia",
+            "coordinates": {
+                "latitude": 90.432542,
+                "longitude": -32.973748
+            },
+            "id": 112,
+            "type": "Portal"
+        }, {
+            "gameSettings": {
+                "ownership": {
+                    "player": "Kuuhaku Sensei"
+                },
+                "energy": 130
+            },
+            "name": "Piltover",
+            "coordinates": {
+                "latitude": 67.432542,
+                "longitude": -42.973748
+            },
+            "id": 113,
+            "type": "Portal"
+        }, {
+            "gameSettings": {
+                "ownership": {
+                    "player": "Raickou"
+                },
+                "energy": 120
+            },
+            "name": "Noxus",
+            "coordinates": {
+                "latitude": 91.432542,
+                "longitude": -13.973748
+            },
+            "id": 114,
+            "type": "Portal"
+        }, {
+            "gameSettings": {
+                "ownership": {
+                    "player": "LoboMau"
+                },
+                "energy": 180
+            },
+            "name": "Jacqueline Kennedy Onassis Reservoir",
+            "coordinates": {
+                "latitude": 40.7656918,
+                "longitude": -73.9737489
+            },
+            "id": 1414,
+            "type": "Portal"
+        }, {
+            "gameSettings": {
+                "cooldown": 5000,
+                "energy": 140
+            },
+            "coordinates": {
+                "latitude": -53.2314,
+                "longitude": 0.0
+            },
+            "id": 111,
+            "type": "Connector"
+        }, {
+            "gameSettings": {
+                "cooldown": 3,
+                "energy": 110
+            },
+            "coordinates": {
+                "latitude": 40.7697989,
+                "longitude": -73.9723702
+            },
+            "id": 5212,
+            "type": "Connector"
+        }]
+}
