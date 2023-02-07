@@ -7,9 +7,9 @@ package graph;
 
 import arrayunorderedlist.ArrayUnorderedList;
 import java.util.Iterator;
-import linkedqueue.EmptyCollectionException;
 import linkedqueue.LinkedQueue;
 import linkedstack.LinkedStack;
+import Excepcions.EmptyCollectionException;
 
 /**
  * Graph represents an adjacency matrix implementation of a graph

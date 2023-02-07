@@ -12,8 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import linkedheap.LinkedHeap;
 import linkedqueue.LinkedQueue;
-import linkedstack.EmptyCollectionException;
 import linkedstack.LinkedStack;
+import Excepcions.EmptyCollectionException;
 
 /**
  *
@@ -285,7 +285,7 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
         while (!traversalStack.isEmpty()) {
             try {
                 x = traversalStack.peek();
-            } catch (EmptyCollectionException ex) {
+            } catch (linkedstack.EmptyCollectionException ex) {
                 Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
             }
             found = false;
@@ -306,7 +306,7 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
             if (!found && !traversalStack.isEmpty()) {
                 try {
                     traversalStack.pop();
-                } catch (EmptyCollectionException ex) {
+                } catch (linkedstack.EmptyCollectionException ex) {
                     Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -355,7 +355,7 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
         while (!traversalQueue.isEmpty()) {
             try {
                 x = traversalQueue.dequeue();
-            } catch (linkedqueue.EmptyCollectionException ex) {
+            } catch (EmptyCollectionException ex) {
                 Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
             }
             resultList.addToRear(vertices[x]);
@@ -396,9 +396,9 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
      * @param targetIndex
      * @return
      * @throws linkedheap.EmptyCollectionException
-     * @throws linkedstack.EmptyCollectionException
+     * @throws Excepcions.EmptyCollectionException
      */
-    public Iterator<Integer> iteratorShortestPathIndices(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException {
+    public Iterator<Integer> iteratorShortestPathIndices(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException, linkedstack.EmptyCollectionException {
         int index;
         double weight;
         int[] predecessor = new int[numberVertices];
@@ -533,7 +533,7 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
         try {
             it = iteratorShortestPathIndices(startIndex,
                     targetIndex);
-        } catch (linkedheap.EmptyCollectionException | EmptyCollectionException ex) {
+        } catch (linkedheap.EmptyCollectionException | EmptyCollectionException | linkedstack.EmptyCollectionException ex) {
             Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
         }
         while (it.hasNext()) {
@@ -579,6 +579,8 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
                     getIndex(targetVertex));
         } catch (linkedheap.EmptyCollectionException | EmptyCollectionException ex) {
             Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (linkedstack.EmptyCollectionException ex) {
+            Logger.getLogger(Network.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
@@ -591,7 +593,7 @@ public class Network<T> extends MatrixGraph<T> implements NetworkADT<T> {
      * @throws linkedheap.EmptyCollectionException
      * @throws EmptyCollectionException
      */
-    public double shortestPathWeight(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException {
+    public double shortestPathWeight(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException, linkedstack.EmptyCollectionException {
         double result = 0;
         if (!indexIsValid(startIndex) || !indexIsValid(targetIndex)) {
             return Double.POSITIVE_INFINITY;

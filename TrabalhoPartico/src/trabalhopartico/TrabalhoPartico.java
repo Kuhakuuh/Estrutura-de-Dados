@@ -152,6 +152,8 @@ public class TrabalhoPartico {
         System.out.println(pm.toString());
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo level" + pm.listPlayerPerLevel());
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados" + pm.listPlayerPerConquestPortals());
+
+     
         System.out.println(lm.getMap().toString());
 
         GameManagement gm = new GameManagement(lm.getMap());
@@ -161,6 +163,8 @@ public class TrabalhoPartico {
 
         System.out.println("\n\nShort Path throw portals\n\n");
         System.out.println(gm.calculateShortestPathThrowPortals(portal2, portal3));
+
+        System.out.println("\n\nShort Path2\n\n");
 
         System.out.println("\n\nShort Path throw connectors\n\n");
         System.out.println(gm.calculateShortestPathThrowConnectors(c1, c2));
