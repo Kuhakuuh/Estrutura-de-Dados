@@ -8,6 +8,7 @@ package trabalhopartico;
 import Enumerations.Estado;
 import Locals.Connectors;
 import Locals.Portal;
+import Management.ExportManagement;
 import Management.GameManagement;
 import Management.LocalManagement;
 import Management.PlayerManagement;
@@ -98,12 +99,19 @@ public class TrabalhoPartico {
         c1.setLatitude(-53.2314);
         c1.setIteraction(ci);
 
+        Connectors c2 = new Connectors();
+        c2.setCooldown(5000);
+        c2.setEnergyAmount(140);
+        c2.setId(222);
+        c2.setLatitude(32.23123);
+        c2.setLatitude(-22.2314);
+
         lm.addPortal(portal1);
         lm.addPortal(portal2);
         lm.addPortal(portal3);
         lm.addPortal(portal4);
         lm.addConnector(c1);
-
+        lm.addConnector(c2);
         RouteManagement rm = new RouteManagement(lm.getMap());
 
         rm.addRoute(portal1, c1, calculate.distance(portal1.getLatitude(), c1.getLatitude(), portal1.getLongitude(), c1.getLongitude()));
@@ -112,18 +120,15 @@ public class TrabalhoPartico {
         rm.addRoute(portal4, c1, calculate.distance(portal4.getLatitude(), c1.getLatitude(), portal4.getLongitude(), c1.getLongitude()));
         rm.addRoute(portal1, portal2, 1.5445);
         rm.addRoute(portal2, portal3, 1.3043);
-
+        rm.addRoute(c1, c2, 1.56);
         System.out.println(lm.getMap().isConnected());
         lm.importJson("src/exemplo(1).json");
         rm.importRoute("src/exemplo(1).json");
+
         lm.listPortals();
         lm.listConnectors();
-
-        lm.exportJson("src/locals.json");
-        rm.exportRoute("src/routes.json");
         System.out.println(lm.getMap().toString());
         System.out.println(lm.getMap().shortestPathWeight(portal4, portal1));
-
         //lm.importJson();
         System.out.println("-----Caminho mas curto------");
         Iterator iter = lm.getMap().iteratorShortestPath(portal2, c1);
@@ -132,9 +137,6 @@ public class TrabalhoPartico {
             System.out.println("Ponto:" + iter.next());
         }
 
-        lm.exportJson("src/locals.json");
-        rm.exportRoute("src/routes.json");
-        
         PlayerManagement pm = new PlayerManagement();
         pm.addPlayer("Raickou");
         pm.addPlayer("Elafar");
@@ -146,18 +148,25 @@ public class TrabalhoPartico {
         pm.updatePlayer("Elafar", -1, -1, 4, 543234, true, 6);
         pm.updatePlayer("P3", -1, -1, 1, 12353, true, 3);
         pm.importJson("src/exemplo(1).json");
-        pm.exportJson("src/player.json");
+
         System.out.println(pm.toString());
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo level" + pm.listPlayerPerLevel());
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados" + pm.listPlayerPerConquestPortals());
         System.out.println(lm.getMap().toString());
+
         GameManagement gm = new GameManagement(lm.getMap());
+
         System.out.println("\n\nShort Path\n\n");
-        System.out.println(gm.calculateShortestPathBeetweenTwoPoints(portal2, c1));
+        System.out.println(gm.calculateShortestPathBeetweenTwoPoints(portal2, portal3));
 
-        System.out.println("\n\nShort Path2\n\n");
-        System.out.println(gm.calculateShortestPathOnlyThrowPortalsorConnectors(portal2, portal3));
+        System.out.println("\n\nShort Path throw portals\n\n");
+        System.out.println(gm.calculateShortestPathThrowPortals(portal2, portal3));
 
+        System.out.println("\n\nShort Path throw connectors\n\n");
+        System.out.println(gm.calculateShortestPathThrowConnectors(c1, c2));
+        System.out.println(lm.getMap().toString());
+        ExportManagement export = new ExportManagement(lm, pm, rm, gm);
+        export.exportData("src/game.json");
     }
 
 }

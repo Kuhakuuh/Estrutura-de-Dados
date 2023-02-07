@@ -9,7 +9,6 @@ import Enumerations.Estado;
 import Excepcions.*;
 import Player.Player;
 import Excepcions.InvalidTeamException;
-import Locals.Mapa;
 import arrayOrderedList.ArrayOrderedList;
 import arrayunorderedlist.*;
 import execeptions.InvalidPathValueExeception;
@@ -106,7 +105,7 @@ public class PlayerManagement {
      * @throws Excepcions.NoSuchElementeException if the request element dont
      * exist
      */
-    public void updatePlayer(String name, int energy, int currentEnergy, int level, double experience, boolean enable, int numConquerPortals) throws NoSuchElementeException {
+    public void updatePlayer(String name, int energy, int currentEnergy, int level,long experience, boolean enable, int numConquerPortals) throws NoSuchElementeException {
         Player jogador = findPlayer(name);
         if (jogador == null) {
             throw new NoSuchElementeException("The requested player dont exist");
@@ -262,13 +261,12 @@ public class PlayerManagement {
             playersList.addToRear(player);
         }
         for (JSONObject player : playersList) {
-            Long exp = (Long) player.get("experiencePoints");
             Player tempPlayer = new Player(
                     (String) player.get("name"),
                     getPlayerTeam((String) player.get("team")),
                     (int) (long) player.get("currentEnergy"),
                     (int) (long) player.get("level"),
-                    exp.doubleValue(),
+                    (long) player.get("experiencePoints"),
                     true);
             this.playersList.addToRear(tempPlayer);
         }
@@ -302,10 +300,7 @@ public class PlayerManagement {
         };
     }
 
-    public void exportJson(String path) throws InvalidPathValueExeception, IOException {
-        if ("".equals(path)) {
-            throw new InvalidPathValueExeception("Valor inválido");
-        }
+    public JSONArray exportJson() throws IOException {
         JSONArray playerList = new JSONArray();
         for (Player player : this.playersList) {
             JSONObject jsonPlayer = new JSONObject();
@@ -317,12 +312,7 @@ public class PlayerManagement {
             playerList.add(jsonPlayer);
         }
 
-        JSONObject json = new JSONObject();
-        json.put("Players", playerList);
-        try (FileWriter file = new FileWriter(path)) {
-            file.write(json.toJSONString());
-            file.flush();
-        }
+        return playerList;
 
     }
 

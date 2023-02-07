@@ -143,6 +143,8 @@ public class MatrixGraph<T> implements GraphADT<T> {
     public void removeEdge(T vertex1, T vertex2) {
         int index1 = this.getIndex(vertex1);
         int index2 = this.getIndex(vertex2);
+        this.vertices[index1] = null;
+        this.vertices[index2] = null;
 
         if (this.indexIsValid(index1) && this.indexIsValid(index2)) {
             this.adjMatrix[index1][index2] = false;

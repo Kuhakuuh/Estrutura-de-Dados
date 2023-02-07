@@ -120,12 +120,8 @@ public class RouteManagement<T> {
         return map.getIdByPos(pos);
     }
 
-    public void exportRoute(String path) throws InvalidPathValueExeception, IOException, ParseException {
-        if ("".equals(path)) {
-            throw new InvalidPathValueExeception("Valor inválido");
-        }
+    public JSONArray exportRoute() throws IOException {
         JSONArray routesArray = new JSONArray();
-
         for (int i = 0; i < map.getNumberVertices(); i++) {
             for (int j = map.getNumberVertices() - 1; j > i; j--) {
                 if (map.getAdjMatrixNetwork()[i][j] < Double.POSITIVE_INFINITY) {
@@ -136,25 +132,7 @@ public class RouteManagement<T> {
                 }
             }
         }
-        // Caso seja para manter os dados atuais do ficheiro
-//        JSONParser parser = new JSONParser();
-//        Object obj = parser.parse(new FileReader(path));
-//        JSONObject json = (JSONObject) obj;
-//        JSONArray jsonArray = (JSONArray) json.get("routes");
-//        if (jsonArray != null) {
-//            for (int i = 0; i < jsonArray.size(); i++) {
-//                JSONObject route = (JSONObject) jsonArray.get(i);
-//                routesArray.add(route);
-//            }
-//        }
-        JSONObject json = new JSONObject();
-        json.put("routes", routesArray);
-        try (FileWriter file = new FileWriter(path)) {
-            file.write(json.toJSONString());
-
-            file.flush();
-        }
-
+        return routesArray;
     }
 
 }
