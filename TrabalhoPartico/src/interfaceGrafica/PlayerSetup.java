@@ -21,7 +21,7 @@ import org.json.simple.parser.ParseException;
  * @author Tiago Lopes, Rafael Dias
  */
 public class PlayerSetup extends javax.swing.JFrame {
-
+    
     PlayerManagement pm = new PlayerManagement();
     Mapa map = new Mapa();
     ImageIcon imagemGiants = new ImageIcon("src/interfaceGrafica/GiantsTeam.png");
