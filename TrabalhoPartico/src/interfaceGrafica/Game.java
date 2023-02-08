@@ -155,10 +155,10 @@ public class Game extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbExpPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lbLevel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -306,7 +306,11 @@ public class Game extends javax.swing.JFrame {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
         listaJogadores.enqueue(currentPlayer);
-        gameturns();
+        try {
+            gameturns();
+        } catch (EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -326,7 +330,7 @@ public class Game extends javax.swing.JFrame {
         return same;
     }
 
-    private void positionActions() {
+    private void positionActions() throws EmptyCollectionException {
         Local position = currentPlayer.getPosition();
         if (position.getClass() == Portal.class) {
             if (sameTeamPortal()) {
@@ -340,9 +344,13 @@ public class Game extends javax.swing.JFrame {
         }
     }
 
-    private void gameturns() {
+    private void gameturns() throws EmptyCollectionException {
 
         if (!exitFlag) {
+            if(currentPlayer.getPosition()==null){
+                setTeamStartPosition();
+            }
+            positionActions();
             lbPlayer.setText(currentPlayer.getName());
             lbLevel.setText(String.valueOf(currentPlayer.getLevel()));
             lbExpPoints.setText(String.valueOf(currentPlayer.getExperience()));
@@ -354,6 +362,14 @@ public class Game extends javax.swing.JFrame {
         }
     }
 
+    private void setTeamStartPosition() throws EmptyCollectionException {
+        if (currentPlayer.getEquipa() == Estado.SPARKS) {
+            currentPlayer.setPosition((Local) lm.getMap().getPortals().first());
+        }
+        if (currentPlayer.getEquipa() == Estado.GIANTS) {
+            currentPlayer.setPosition((Local) lm.getMap().getPortals().last());
+        }
+    }
 
     private void btnMoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoverActionPerformed
         // TODO add your handling code here:
@@ -362,7 +378,11 @@ public class Game extends javax.swing.JFrame {
         } catch (Excepcions.EmptyCollectionException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-        gameturns();
+        try {
+            gameturns();
+        } catch (EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnMoverActionPerformed
 
     private void btnRecarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecarregarActionPerformed
@@ -372,7 +392,11 @@ public class Game extends javax.swing.JFrame {
         } catch (Excepcions.EmptyCollectionException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-        gameturns();
+        try {
+            gameturns();
+        } catch (EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnRecarregarActionPerformed
 
     private void btnConquistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConquistarActionPerformed
@@ -382,7 +406,11 @@ public class Game extends javax.swing.JFrame {
         } catch (Excepcions.EmptyCollectionException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-        gameturns();
+        try {
+            gameturns();
+        } catch (EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnConquistarActionPerformed
 
     private void btnFortalecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFortalecerActionPerformed
@@ -392,7 +420,12 @@ public class Game extends javax.swing.JFrame {
         } catch (Excepcions.EmptyCollectionException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
-        gameturns();
+        try {
+            gameturns();
+        } catch (EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btnFortalecerActionPerformed
 
     /**
