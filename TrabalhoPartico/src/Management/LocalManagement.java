@@ -305,15 +305,11 @@ public class LocalManagement<T> {
     /**
      * Returns an JSONArray of all Locals
      *
-     * @param path
      * @return
      * @throws IOException
-     * @throws InvalidPathValueExeception
      */
-    public JSONArray exportLocals(String path) throws IOException, InvalidPathValueExeception {
-        if ("".equals(path)) {
-            throw new InvalidPathValueExeception("Valor inválido");
-        }
+    public JSONArray exportLocals() throws IOException {
+
         ArrayUnorderedList<Portal> portals = map.getPortals();
         ArrayUnorderedList<Connectors> connectores = map.getConnectors();
         JSONArray locals = new JSONArray();
@@ -354,21 +350,12 @@ public class LocalManagement<T> {
     /**
      * Export the data of Locals to a json file
      *
-     * @param path
+     * @return
      * @throws IOException
-     * @throws InvalidPathValueExeception
      */
-    public void exportJson(String path) throws IOException, InvalidPathValueExeception {
-        if ("".equals(path)) {
-            throw new InvalidPathValueExeception("Valor inválido");
-        }
-        JSONObject Jsonportais = new JSONObject();
-        JSONArray Jsonlocals = exportLocals(path);
-        Jsonportais.put("locals", Jsonlocals);
-        try (FileWriter file = new FileWriter(path)) {
-            file.write(Jsonportais.toJSONString());
-            file.flush();
-        }
+    public JSONArray exportJson() throws IOException {
+        JSONArray Jsonlocals = exportLocals();
+        return Jsonlocals;
     }
 
     /**
