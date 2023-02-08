@@ -6,6 +6,7 @@
 package Player;
 
 import Enumerations.Estado;
+import Locals.Local;
 
 /**
  * Class that represents a player Player atributs: name: name of the player
@@ -29,6 +30,7 @@ public class Player implements Comparable {
 
     private boolean enable;
     private int numConquerPortals;
+    private Local position;
 
     private final int startLevel = 1;
     private final int startEnergy = 50;
@@ -251,6 +253,24 @@ public class Player implements Comparable {
      */
     public void setNumConquerPortals(int numConquerPortals) {
         this.numConquerPortals = numConquerPortals;
+    }
+    
+    /**
+     * Returns the position of the player
+     *
+     * @return Local
+     */
+    public Local getPosition() {
+        return position;
+    }
+
+    /**
+     * Assigns the position of the player
+     *
+     * @param position
+     */
+    public void setPosition(Local position) {
+        this.position = position;
     }
 
     /**
