@@ -10,7 +10,6 @@ import Locals.Mapa;
 import Excepcions.*;
 import Locals.*;
 import arrayunorderedlist.ArrayUnorderedList;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import org.json.simple.JSONArray;
@@ -122,7 +121,6 @@ public class GameManagement {
             count = count - 2;
 
         }
-        //System.out.println(map.toString());
         return str;
 
     }
@@ -191,7 +189,6 @@ public class GameManagement {
                             to.getLongitude()));
             count = count - 2;
         }
-        //System.out.println(map.toString());
         return str;
 
     }
