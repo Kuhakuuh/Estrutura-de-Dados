@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Management;
 
 import Enumerations.Estado;
@@ -38,23 +33,25 @@ public class PlayerManagement {
     public PlayerManagement() {
 
     }
-    
+
     /**
-     *  Method that return the list of players
+     * Method that return the list of players
+     *
      * @return ArrayUnorderedList of type Player
      */
-    public ArrayUnorderedList<Player> getPlayerList(){
+    public ArrayUnorderedList<Player> getPlayerList() {
         return playersList;
     }
-    
+
     /**
      * Method tha returns the number of players
+     *
      * @return int
      */
-    public int numbPlayers(){
+    public int numbPlayers() {
         return playersList.size();
     }
-    
+
     /**
      * Method that adds a new player receiving the name
      *
@@ -203,6 +200,8 @@ public class PlayerManagement {
     /**
      * Method that return list of the playres per team first the team GIANT
      * players, SPARKS players and then players that dont have team
+     *
+     * @return
      */
     public String listPlayerPerTeam() {
         LinkedStack<Player> teamSparks = new LinkedStack();
@@ -212,15 +211,12 @@ public class PlayerManagement {
         while (iterPlayer.hasNext()) {
             Player jogador = (Player) iterPlayer.next();
             switch (jogador.getEquipa()) {
-                case SPARKS:
+                case SPARKS ->
                     teamSparks.push(jogador);
-                    break;
-                case GIANTS:
+                case GIANTS ->
                     teamGiants.push(jogador);
-                    break;
-                default:
+                default ->
                     noTeam.push(jogador);
-                    break;
             }
         }
         return ("Team GIANTS\n" + teamGiants.toString() + "\nTeam SPARKS\n" + teamSparks.toString()
@@ -261,6 +257,15 @@ public class PlayerManagement {
         return listPlayerPerConquestPortals.toString();
     }
 
+    /**
+     * Imports the player from the file
+     *
+     * @param path
+     * @throws InvalidPathValueExeception
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws ParseException
+     */
     public void importJson(String path) throws InvalidPathValueExeception, FileNotFoundException, IOException, ParseException {
         if ("".equals(path)) {
             throw new InvalidPathValueExeception("Valor inválido");
@@ -304,6 +309,12 @@ public class PlayerManagement {
         };
     }
 
+    /**
+     * Return a String base on Estado enum
+     *
+     * @param team
+     * @return
+     */
     public String estadoToString(Estado team) {
         return switch (team) {
             case GIANTS ->
@@ -315,6 +326,12 @@ public class PlayerManagement {
         };
     }
 
+    /**
+     * Return a JsonArray of players
+     *
+     * @return
+     * @throws IOException
+     */
     public JSONArray exportJson() throws IOException {
         JSONArray playerList = new JSONArray();
         for (Player player : this.playersList) {

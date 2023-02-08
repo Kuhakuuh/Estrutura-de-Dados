@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Player;
 
 import Enumerations.Estado;
@@ -52,12 +47,11 @@ public class Player implements Comparable {
      * @param equipa
      * @param energy
      * @param currentEnergy
-     * @param level
      * @param experience
      * @param enable
      * @param numConquerPortals
      */
-    public Player(String name, Estado equipa, int energy, int currentEnergy, int level, long experience, boolean enable, int numConquerPortals) {
+    public Player(String name, Estado equipa, int energy, int currentEnergy, long experience, boolean enable, int numConquerPortals) {
         this.level = (int) (X * Math.sqrt(experience));
         this.name = name;
         this.equipa = equipa;
@@ -202,6 +196,13 @@ public class Player implements Comparable {
     }
 
     /**
+     * Assigns the level base on experience points
+     */
+    public void setLevel() {
+        this.level = this.level = (int) (X * Math.sqrt(experience));
+    }
+
+    /**
      * Returns the experience
      *
      * @return double
@@ -254,7 +255,7 @@ public class Player implements Comparable {
     public void setNumConquerPortals(int numConquerPortals) {
         this.numConquerPortals = numConquerPortals;
     }
-    
+
     /**
      * Returns the position of the player
      *

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Management;
 
 import Enumerations.Estado;
@@ -21,7 +16,6 @@ import execeptions.NullInterationExeception;
 import execeptions.NullLocalExeception;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -158,6 +152,10 @@ public class LocalManagement<T> {
      * @param connector
      * @param iteraction
      * @throws arrayunorderedlist.EmptyCollectionException
+     * @throws execeptions.NullLocalExeception
+     * @throws execeptions.NullInterationExeception
+     * @throws Excepcions.NoSuchElementeException
+     * @throws Excepcions.EmptyCollectionException
      */
     public void removeConnectorIteraction(Connectors connector, ConnectorIteraction iteraction) throws EmptyCollectionException, NullLocalExeception, NullInterationExeception, NoSuchElementeException, Excepcions.EmptyCollectionException {
         if (connector == null) {
@@ -225,7 +223,6 @@ public class LocalManagement<T> {
         if ("".equals(path)) {
             throw new InvalidPathValueExeception("Valor inválido");
         }
-
         ArrayUnorderedList<JSONObject> portals = new ArrayUnorderedList<>();
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(path));
@@ -237,7 +234,6 @@ public class LocalManagement<T> {
                 portals.addToRear(local);
             }
         }
-        // Aqui podes trabalhar com os portals e connectors como quiseres
         Iterator iterPortals = portals.iterator();
         ArrayUnorderedList<Portal> portais = new ArrayUnorderedList<>();
         while (iterPortals.hasNext()) {
@@ -376,6 +372,12 @@ public class LocalManagement<T> {
         this.map = map;
     }
 
+    /**
+     * Returns an ArrayUnorderedList of possible routes to that local
+     *
+     * @param local
+     * @return
+     */
     public ArrayUnorderedList getLocalRoutes(Local local) {
         ArrayUnorderedList routes = new ArrayUnorderedList();
         for (int i = 0; i < map.getNumberVertices(); i++) {

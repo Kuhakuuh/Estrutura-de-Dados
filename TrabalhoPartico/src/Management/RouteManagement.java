@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Management;
 
-import Locals.Connectors;
 import Locals.Local;
 import Locals.Mapa;
-import Locals.Portal;
 import arrayunorderedlist.ArrayUnorderedList;
 import execeptions.InvalidPathValueExeception;
 import execeptions.NullLocalExeception;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import org.json.simple.JSONArray;
@@ -105,6 +97,12 @@ public class RouteManagement<T> {
         }
     }
 
+    /**
+     * Find a local base on id
+     *
+     * @param id
+     * @return
+     */
     private Local findLocalById(int id) {
         Iterator iter = map.getLocals().iterator();
         while (iter.hasNext()) {
@@ -116,10 +114,22 @@ public class RouteManagement<T> {
         return null;
     }
 
+    /**
+     * Get the indice of the possition by is position
+     *
+     * @param pos
+     * @return
+     */
     private int getIndiceByPos(int pos) {
         return map.getIdByPos(pos);
     }
 
+    /**
+     * Returns a JsonArray of routes
+     *
+     * @return
+     * @throws IOException
+     */
     public JSONArray exportRoute() throws IOException {
         JSONArray routesArray = new JSONArray();
         for (int i = 0; i < map.getNumberVertices(); i++) {
