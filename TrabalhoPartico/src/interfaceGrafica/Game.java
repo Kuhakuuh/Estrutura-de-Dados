@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -76,6 +77,10 @@ public class Game extends javax.swing.JFrame {
         btnFortalecer = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         displayMap = new javax.swing.JTextArea();
+        energyPanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        energyAmount = new javax.swing.JSpinner();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("In Game");
@@ -215,6 +220,47 @@ public class Game extends javax.swing.JFrame {
         displayMap.setEnabled(false);
         jScrollPane1.setViewportView(displayMap);
 
+        energyPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel8.setText("Quantidade de energia a utilizar na ação");
+
+        energyAmount.setModel(new javax.swing.SpinnerNumberModel(0, 0, 0, 1));
+
+        jToggleButton1.setText("Confirmar");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout energyPanelLayout = new javax.swing.GroupLayout(energyPanel);
+        energyPanel.setLayout(energyPanelLayout);
+        energyPanelLayout.setHorizontalGroup(
+            energyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(energyPanelLayout.createSequentialGroup()
+                .addGroup(energyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(energyPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(energyAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(energyPanelLayout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jToggleButton1)))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        energyPanelLayout.setVerticalGroup(
+            energyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(energyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(energyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(energyAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,22 +271,27 @@ public class Game extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbLocalEnergy, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnMover, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnRecarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnFortalecer, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnConquistar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbLocalEnergy, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbPosition, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnMover, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnRecarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnFortalecer, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnConquistar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(6, 6, 6))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(energyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -272,7 +323,9 @@ public class Game extends javax.swing.JFrame {
                             .addComponent(btnRecarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnConquistar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFortalecer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnFortalecer, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(energyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -281,12 +334,24 @@ public class Game extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void PortalsTeams(){
+        
+    Mapa mapa = lm.getMap();
+    ArrayUnorderedList<Portal> portals = mapa.getPortals();
+    Iterator iterPortals = portals.iterator();
+    Portal auxPortal=null;
+    while(iterPortals.hasNext())
+            auxPortal = (Portal) iterPortals.next();
+            if(auxPortal.getJogador()!=null){
+                
+            }
+            
+    }
+    
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        btnFortalecer.setVisible(false);
-        btnConquistar.setVisible(false);
-        btnRecarregar.setVisible(false);
-
+        defaultSettings();
+        PortalsTeams();
         playerImage.setImage(playerImage.getImage().getScaledInstance(
                 PlayerImage.getWidth(),
                 PlayerImage.getHeight(),
@@ -314,7 +379,17 @@ public class Game extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowOpened
 
+    private void defaultSettings() {
+        btnMover.setVisible(true);
+        btnFortalecer.setVisible(false);
+        btnConquistar.setVisible(false);
+        btnRecarregar.setVisible(false);
+        energyPanel.setVisible(false);
+        displayMap.setText(lm.getMap().toString());
+    }
+
     private void nextPlayerTurn() throws Excepcions.EmptyCollectionException {
+        defaultSettings();
         currentPlayer = (Player) listaJogadores.dequeue();
         listaJogadores.enqueue(currentPlayer);
     }
@@ -322,8 +397,8 @@ public class Game extends javax.swing.JFrame {
     private boolean sameTeamPortal() {
         boolean same = false;
         Estado teamPlayer = currentPlayer.getEquipa();
-        Portal portal = (Portal) currentPlayer.getPosition();
-        Estado teamPortal = portal.getJogador().getEquipa();
+        Portal portal = (Portal) lm.getMap().getLocalById(currentPlayer.getPosition().getId());
+        Estado teamPortal = portal.getEstado();
         if (teamPlayer == teamPortal) {
             same = true;
         }
@@ -347,7 +422,7 @@ public class Game extends javax.swing.JFrame {
     private void gameturns() throws EmptyCollectionException {
 
         if (!exitFlag) {
-            if(currentPlayer.getPosition()==null){
+            if (currentPlayer.getPosition() == null) {
                 setTeamStartPosition();
             }
             positionActions();
@@ -402,31 +477,69 @@ public class Game extends javax.swing.JFrame {
     private void btnConquistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConquistarActionPerformed
         // TODO add your handling code here:
         try {
-            nextPlayerTurn();
-        } catch (Excepcions.EmptyCollectionException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             gameturns();
+            btnMover.setVisible(false);
+            btnConquistar.setVisible(false);
+            energyPanel.setVisible(true);
+            SpinnerNumberModel model = new SpinnerNumberModel(0, 0, currentPlayer.getCurrentEnergy(), 1);
+            energyAmount.setModel(model);
         } catch (EmptyCollectionException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnConquistarActionPerformed
 
+    private void changePortalState(Portal AuxPortal) {
+        double energyToChangeTeam = (AuxPortal.getMaxEnergy() * 0.25);
+        if (AuxPortal.getEnergyAmount() >= energyToChangeTeam) {
+            AuxPortal.setEstado(currentPlayer.getEquipa());
+            AuxPortal.setJogador(currentPlayer);
+        } else {
+            AuxPortal.setEstado(Estado.NEUTRO);
+            AuxPortal.setJogador(null);
+        }
+    }
+
+    private void atacarPortal() {
+        Portal portal = (Portal) currentPlayer.getPosition();
+        int ataqueEnergy = (int) energyAmount.getValue();
+        Portal AuxPortal = (Portal) lm.getMap().getLocalById(portal.getId());
+        int dif = 0;
+        currentPlayer.setCurrentEnergy(currentPlayer.getCurrentEnergy() - ataqueEnergy);
+        if (portal.getEnergyAmount() >= ataqueEnergy) {
+            dif = portal.getEnergyAmount() - ataqueEnergy;
+            AuxPortal.setEnergyAmount(dif);
+        } else {
+            dif = ataqueEnergy - portal.getEnergyAmount();
+            AuxPortal.setEnergyAmount(dif);
+            changePortalState(AuxPortal);
+        }
+    }
+
     private void btnFortalecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFortalecerActionPerformed
         // TODO add your handling code here:
         try {
+            btnMover.setVisible(false);
+            energyPanel.setVisible(true);
             nextPlayerTurn();
-        } catch (Excepcions.EmptyCollectionException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             gameturns();
-        } catch (EmptyCollectionException ex) {
+        } catch (EmptyCollectionException | Excepcions.EmptyCollectionException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnFortalecerActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            atacarPortal();
+            nextPlayerTurn();
+            gameturns();
+        } catch (EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Excepcions.EmptyCollectionException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -470,6 +583,8 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnMover;
     private javax.swing.JToggleButton btnRecarregar;
     private javax.swing.JTextArea displayMap;
+    private javax.swing.JSpinner energyAmount;
+    private javax.swing.JPanel energyPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -477,8 +592,10 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lbCurrentEnergy;
     private javax.swing.JLabel lbExpPoints;
     private javax.swing.JLabel lbLevel;

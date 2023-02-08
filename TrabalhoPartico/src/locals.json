@@ -2,7 +2,7 @@
     "locals": [{
             "gameSettings": {
                 "ownership": {
-                    "player": "Kuuhaku Sensei"
+                    "player": "Lobo Mau"
                 },
                 "energy": 150
             },
@@ -30,7 +30,7 @@
         }, {
             "gameSettings": {
                 "ownership": {
-                    "player": "Kuuhaku Sensei"
+                    "player": "Lobo Mau"
                 },
                 "energy": 130
             },
