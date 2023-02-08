@@ -255,7 +255,7 @@ public class PlayerSetup extends javax.swing.JFrame {
     private void importPlayersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importPlayersActionPerformed
         try {
             // TODO add your handling code here:
-            pm.importJson("src/player.json");
+            pm.importJson("src/game.json");
             output.setText(pm.listPlayerPerLevel());
         } catch (InvalidPathValueExeception ex) {
             Logger.getLogger(PlayerSetup.class.getName()).log(Level.SEVERE, null, ex);

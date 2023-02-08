@@ -143,9 +143,9 @@ public class MapaSetup extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             //lm.importJson("src/locals.json");
-            lm.importJson("src/locals.json");
+            lm.importJson("src/game.json");
             RouteManagement rm = new RouteManagement(lm.getMap());
-            rm.importRoute("src/routes.json");
+            rm.importRoute("src/game.json");
             display.setText(lm.getMap().toString());
             
             PlayerSetup player = new PlayerSetup();

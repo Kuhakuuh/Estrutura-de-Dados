@@ -36,7 +36,7 @@ import org.json.simple.parser.ParseException;
 public class LocalManagement<T> {
 
     private Mapa<Local> map = new Mapa<Local>();
-    
+
     /**
      * Empty construtor
      */
@@ -351,7 +351,6 @@ public class LocalManagement<T> {
         return locals;
     }
 
-
     /**
      * Export the data of Locals to a json file
      *
@@ -370,6 +369,29 @@ public class LocalManagement<T> {
             file.write(Jsonportais.toJSONString());
             file.flush();
         }
+    }
+
+    public ArrayUnorderedList getLocalRoutes(Local local) {
+        ArrayUnorderedList routes = new ArrayUnorderedList();
+        for (int i = 0; i < map.getNumberVertices(); i++) {
+            for (int j = map.getNumberVertices() - 1; j > i; j--) {
+                if (map.getAdjMatrixNetwork()[i][j] < Double.POSITIVE_INFINITY) {
+                    int fromId = map.getIdByPos(i);
+                    int toId = map.getIdByPos(j);
+                    if (fromId == local.getId() | toId == local.getId()) {
+                        if (local.getId() != fromId) {
+                            routes.addToRear(fromId);
+                        }
+                        if (local.getId() != toId) {
+                            routes.addToRear(toId);
+                        }
+
+                    }
+
+                }
+            }
+        }
+        return routes;
     }
 
     /**

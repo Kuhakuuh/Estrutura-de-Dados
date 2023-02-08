@@ -1,8 +1,53 @@
 {
+    "routes": [{
+            "from": 111,
+            "to": 114
+        }, {
+            "from": 111,
+            "to": 113
+        }, {
+            "from": 111,
+            "to": 112
+        }, {
+            "from": 111,
+            "to": 110
+        }, {
+            "from": 111,
+            "to": 222
+        }, {
+            "from": 5212,
+            "to": 1414
+        }, {
+            "from": 110,
+            "to": 114
+        }, {
+            "from": 110,
+            "to": 112
+        }, {
+            "from": 112,
+            "to": 113
+        }],
+    "ShortestsPaths": {
+        "ShortestPathPortal": [{
+                "Portal": 112
+            }, {
+                "Portal": 113
+            }],
+        "ShortestPath": [{
+                "Local": 112
+            }, {
+                "Local": 113
+            }],
+        "ShortestPathConnector": [{
+                "Portal": 111
+            }, {
+                "Portal": 222
+            }]
+    },
     "locals": [{
             "gameSettings": {
                 "ownership": {
-                    "player": "LoboMau"
+                    "player": "Kuuhaku Sensei"
                 },
                 "energy": 150
             },
@@ -30,7 +75,7 @@
         }, {
             "gameSettings": {
                 "ownership": {
-                    "player": "LoboMau"
+                    "player": "Kuuhaku Sensei"
                 },
                 "energy": 130
             },
@@ -82,6 +127,17 @@
             "type": "Connector"
         }, {
             "gameSettings": {
+                "cooldown": 5000,
+                "energy": 140
+            },
+            "coordinates": {
+                "latitude": -22.2314,
+                "longitude": 0.0
+            },
+            "id": 222,
+            "type": "Connector"
+        }, {
+            "gameSettings": {
                 "cooldown": 3,
                 "energy": 110
             },
@@ -91,5 +147,30 @@
             },
             "id": 5212,
             "type": "Connector"
+        }],
+    "Players": [{
+            "level": 3,
+            "name": "Raickou",
+            "experiencePoints": 5433,
+            "currentEnergy": 50,
+            "team": "Giants"
+        }, {
+            "level": 4,
+            "name": "Elafar",
+            "experiencePoints": 543234,
+            "currentEnergy": 50,
+            "team": "Sparks"
+        }, {
+            "level": 1,
+            "name": "P3",
+            "experiencePoints": 12353,
+            "currentEnergy": 50,
+            "team": "Giants"
+        }, {
+            "level": 5,
+            "name": "LoboMau",
+            "experiencePoints": 24998,
+            "currentEnergy": 70,
+            "team": "Sparks"
         }]
 }
