@@ -9,7 +9,7 @@ import arrayunorderedlist.ArrayUnorderedList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import linkedqueue.EmptyCollectionException;
+import Excepcions.EmptyCollectionException;
 import linkedqueue.LinkedQueue;
 
 /**

@@ -116,6 +116,10 @@ public class RouteManagement<T> {
         return null;
     }
 
+    private int getIndiceByPos(int pos) {
+        return map.getIdByPos(pos);
+    }
+
     public void exportRoute(String path) throws InvalidPathValueExeception, IOException, ParseException {
         if ("".equals(path)) {
             throw new InvalidPathValueExeception("Valor inválido");
@@ -126,8 +130,8 @@ public class RouteManagement<T> {
             for (int j = map.getNumberVertices() - 1; j > i; j--) {
                 if (map.getAdjMatrixNetwork()[i][j] < Double.POSITIVE_INFINITY) {
                     JSONObject route = new JSONObject();
-                    route.put("from", i);
-                    route.put("to", j);
+                    route.put("from", getIndiceByPos(i));
+                    route.put("to", getIndiceByPos(j));
                     routesArray.add(route);
                 }
             }

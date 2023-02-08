@@ -9,6 +9,7 @@ import Enumerations.Estado;
 import Excepcions.*;
 import Player.Player;
 import Excepcions.InvalidTeamException;
+import Locals.Mapa;
 import arrayOrderedList.ArrayOrderedList;
 import arrayunorderedlist.*;
 import execeptions.InvalidPathValueExeception;
@@ -30,16 +31,32 @@ import org.json.simple.parser.ParseException;
  * @author Tiago Lopes, Rafael Dias
  */
 public class PlayerManagement {
-    
+
     ArrayUnorderedList<Player> playersList = new ArrayUnorderedList<Player>();
 
     /**
      * Empty construtor
      */
     public PlayerManagement() {
-        
-    }
 
+    }
+    
+    /**
+     *  Method that return the list of players
+     * @return ArrayUnorderedList of type Player
+     */
+    public ArrayUnorderedList<Player> getPlayerList(){
+        return playersList;
+    }
+    
+    /**
+     * Method tha returns the number of players
+     * @return int
+     */
+    public int numbPlayers(){
+        return playersList.size();
+    }
+    
     /**
      * Method that adds a new player receiving the name
      *
@@ -69,7 +86,7 @@ public class PlayerManagement {
             if (nome.equals(jogador.getName())) {
                 exist = true;
             }
-            
+
         }
         return exist;
     }
@@ -146,7 +163,7 @@ public class PlayerManagement {
             throw new InvalidTeamException("Invalid tem, teams available are GIANTS or SPARKS");
         }
         jogador.setEquipa(equipa);
-        
+
     }
 
     /**
@@ -210,7 +227,7 @@ public class PlayerManagement {
         }
         return ("Team GIANTS\n" + teamGiants.toString() + "\nTeam SPARKS\n" + teamSparks.toString()
                 + "\nSem equipa\n" + noTeam.toString());
-        
+
     }
 
     /**
@@ -245,7 +262,7 @@ public class PlayerManagement {
         }
         return listPlayerPerConquestPortals.toString();
     }
-    
+
     public void importJson(String path) throws InvalidPathValueExeception, FileNotFoundException, IOException, ParseException {
         if ("".equals(path)) {
             throw new InvalidPathValueExeception("Valor inválido");
@@ -255,18 +272,19 @@ public class PlayerManagement {
         Object obj = parser.parse(new FileReader(path));
         JSONObject json = (JSONObject) obj;
         JSONArray players = (JSONArray) json.get("Players");
-        
+
         for (int i = 0; i < players.size(); i++) {
             JSONObject player = (JSONObject) players.get(i);
             playersList.addToRear(player);
         }
         for (JSONObject player : playersList) {
+            Long exp = (Long) player.get("experiencePoints");
             Player tempPlayer = new Player(
                     (String) player.get("name"),
                     getPlayerTeam((String) player.get("team")),
                     (int) (long) player.get("currentEnergy"),
                     (int) (long) player.get("level"),
-                    (double) (long) player.get("experiencePoints"),
+                    exp.doubleValue(),
                     true);
             this.playersList.addToRear(tempPlayer);
         }
@@ -288,7 +306,7 @@ public class PlayerManagement {
                 Estado.NEUTRO;
         };
     }
-    
+
     public String estadoToString(Estado team) {
         return switch (team) {
             case GIANTS ->
@@ -299,7 +317,7 @@ public class PlayerManagement {
                 "Neutro";
         };
     }
-    
+
     public void exportJson(String path) throws InvalidPathValueExeception, IOException {
         if ("".equals(path)) {
             throw new InvalidPathValueExeception("Valor inválido");
@@ -314,14 +332,14 @@ public class PlayerManagement {
             jsonPlayer.put("experiencePoints", player.getExperience());
             playerList.add(jsonPlayer);
         }
-        
+
         JSONObject json = new JSONObject();
-        json.put("players", playerList);
+        json.put("Players", playerList);
         try (FileWriter file = new FileWriter(path)) {
             file.write(json.toJSONString());
             file.flush();
         }
-        
+
     }
 
     /**
@@ -341,5 +359,5 @@ public class PlayerManagement {
         }
         return msg;
     }
-    
+
 }

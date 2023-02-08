@@ -1,52 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
-        <file>
-            <url>src/Management/PlayerManagement.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>55</line>
-                <key/>
-            </bookmark>
-        </file>
-    </editor-bookmarks>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/Player/Player.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/Management/RouteManagement.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/locals.json</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/player.json</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/test.json</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/interfaceGrafica/Game.java</file>
             <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/Management/PlayerManagement.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/arrayunorderedlist/ArrayUnorderedList.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/trabalhopartico/TrabalhoPartico.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/Locals/Mapa.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/Management/GameManagement.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/network/Network.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/arrayunorderedlist/ArrayList.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/Management/LocalManagement.java</file>
-            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/arrayOrderedList/ArrayOrderedList.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/execeptions/NullInterationExeception.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/execeptions/InvalidPathValueExeception.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/routes.json</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/arrayunorderedlist/ArrayUnorderedList.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Management/LocalManagement.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Locals/Mapa.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Management/RouteManagement.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Locals/Local.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Player/Player.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/trabalhopartico/CalculateDistance.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/graph/MatrixGraph.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Management/PlayerManagement.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Management/GameManagement.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/test2.json</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Locals/Portal.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/exemplo(1).json</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Enumerations/Estado.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/test.json</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Player/ConnectorIteraction.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/locals.json</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/Locals/Connectors.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/trabalhopartico/TrabalhoPartico.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/network/Network.java</file>
-            <file>file:/C:/Users/Tiago%20Lopes/Documents/TrabalhoEd/TrabalhoPartico/src/execeptions/NullLocalExeception.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/interfaceGrafica/MapaSetup.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/TP_ED/TrabalhoPartico/src/routes.json</file>
         </group>
     </open-files>
 </project-private>

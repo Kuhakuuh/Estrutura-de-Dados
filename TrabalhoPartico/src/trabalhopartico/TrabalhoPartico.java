@@ -7,7 +7,6 @@ package trabalhopartico;
 
 import Enumerations.Estado;
 import Locals.Connectors;
-import Locals.Local;
 import Locals.Portal;
 import Management.GameManagement;
 import Management.LocalManagement;
@@ -18,7 +17,6 @@ import Player.Player;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Iterator;
-import network.Network;
 
 /**
  *
@@ -128,12 +126,16 @@ public class TrabalhoPartico {
 
         //lm.importJson();
         System.out.println("-----Caminho mas curto------");
-        Iterator iter = lm.getMap().iteratorShortestPath(portal1, portal4);
+        Iterator iter = lm.getMap().iteratorShortestPath(portal2, c1);
         while (iter.hasNext()) {
+
             System.out.println("Ponto:" + iter.next());
         }
 
         lm.exportJson("src/test.json");
+
+        lm.exportJson("src/locals.json");
+        rm.exportRoute("src/routes.json");
 
         PlayerManagement pm = new PlayerManagement();
         pm.addPlayer("Raickou");
@@ -142,9 +144,9 @@ public class TrabalhoPartico {
         System.out.println(pm.toString());
         pm.addTeam("Raickou", Estado.GIANTS);
         pm.addPlayer("P3");
-        pm.updatePlayer("Raickou", -1, -1, 3, -1, true, 2);
-        pm.updatePlayer("Elafar", -1, -1, 4, -1, true, 6);
-        pm.updatePlayer("P3", -1, -1, 1, -1, true, 3);
+        pm.updatePlayer("Raickou", -1, -1, 3, 5433, true, 2);
+        pm.updatePlayer("Elafar", -1, -1, 4, 543234, true, 6);
+        pm.updatePlayer("P3", -1, -1, 1, 12353, true, 3);
         pm.importJson("src/exemplo(1).json");
         pm.exportJson("src/player.json");
         System.out.println(pm.toString());
@@ -152,14 +154,16 @@ public class TrabalhoPartico {
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados" + pm.listPlayerPerConquestPortals());
 
         lm.exportJson("src/test.json");
-        
+        System.out.println(lm.getMap().toString());
         GameManagement gm = new GameManagement(lm.getMap());
         System.out.println("\n\nShort Path\n\n");
-        System.out.println(gm.calculateShortestPathBeetweenTwoPoints(portal2,c1));
-        
+        System.out.println(gm.calculateShortestPathBeetweenTwoPoints(portal2, c1));
+
         System.out.println("\n\nShort Path2\n\n");
         System.out.println(gm.calculateShortestPathOnlyThrowPortalsorConnectors(portal2,portal3));
         
+        System.out.println(gm.calculateShortestPathOnlyThrowPortalsorConnectors(portal2, portal3));
+
     }
 
 }
