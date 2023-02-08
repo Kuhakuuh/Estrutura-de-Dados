@@ -35,7 +35,6 @@ public class LaunchGame extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         txtTitle = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
-        btnAdminTools = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -72,22 +71,9 @@ public class LaunchGame extends javax.swing.JFrame {
         getContentPane().add(btnStart);
         btnStart.setBounds(130, 150, 100, 40);
 
-        btnAdminTools.setText("Admin tools");
-        btnAdminTools.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminToolsActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAdminTools);
-        btnAdminTools.setBounds(261, 340, 90, 21);
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAdminToolsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminToolsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdminToolsActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
@@ -132,7 +118,6 @@ public class LaunchGame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdminTools;
     private javax.swing.JButton btnStart;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel txtTitle;
