@@ -25,19 +25,23 @@ public class Player implements Comparable {
     private Estado equipa;
     private int energy;
     private int currentEnergy;
+    private long experience;
     private int level;
-    private double experience;
+
     private boolean enable;
     private int numConquerPortals;
     private Local position;
 
     private final int startLevel = 1;
     private final int startEnergy = 50;
+    private final double X = 0.07;
+    private final int Y = 2;
 
     /**
      * Empty construtor
      */
     public Player() {
+        this.level = (int) (X * Math.sqrt(experience));
 
     }
 
@@ -53,7 +57,8 @@ public class Player implements Comparable {
      * @param enable
      * @param numConquerPortals
      */
-    public Player(String name, Estado equipa, int energy, int currentEnergy, int level, double experience, boolean enable, int numConquerPortals) {
+    public Player(String name, Estado equipa, int energy, int currentEnergy, int level, long experience, boolean enable, int numConquerPortals) {
+        this.level = (int) (X * Math.sqrt(experience));
         this.name = name;
         this.equipa = equipa;
         this.energy = energy;
@@ -73,9 +78,9 @@ public class Player implements Comparable {
      * @param level
      * @param experience
      * @param enable
-     * @param numConquerPortals
      */
-    public Player(String name, Estado equipa, int currentEnergy, int level, double experience, boolean enable) {
+    public Player(String name, Estado equipa, int currentEnergy, int level, long experience, boolean enable) {
+        this.level = (int) (X * Math.sqrt(experience));
         this.name = name;
         this.equipa = equipa;
         this.currentEnergy = currentEnergy;
@@ -91,6 +96,7 @@ public class Player implements Comparable {
      * @param name
      */
     public Player(String name) {
+        this.level = (int) (X * Math.sqrt(experience));
         this.name = name;
         this.energy = startEnergy;
         this.currentEnergy = startEnergy;
@@ -101,9 +107,8 @@ public class Player implements Comparable {
         this.numConquerPortals = 0;
     }
 
-    private void setExp() {
-        double exp = Math.pow((this.level / 0.07), 2);
-        double playerLevel = 0.07 * Math.sqrt(this.experience);
+    public void setLevel(long experience) {
+        this.level = (int) (X * Math.sqrt(experience));
     }
 
     /**
@@ -201,7 +206,7 @@ public class Player implements Comparable {
      *
      * @return double
      */
-    public double getExperience() {
+    public long getExperience() {
         return experience;
     }
 
@@ -210,7 +215,7 @@ public class Player implements Comparable {
      *
      * @param experience
      */
-    public void setExperience(double experience) {
+    public void setExperience(long experience) {
         this.experience = experience;
     }
 

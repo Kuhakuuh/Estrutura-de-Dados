@@ -7,6 +7,9 @@ package Locals;
 
 import arrayunorderedlist.ArrayUnorderedList;
 import java.util.Iterator;
+import linkedheap.LinkedHeap;
+import linkedstack.EmptyCollectionException;
+import linkedstack.LinkedStack;
 import network.Network;
 
 /**
@@ -78,4 +81,90 @@ public class Mapa<T> extends Network<T> {
         return null;
     }
 
+    public Iterator<Integer> iteratorShortestPathIndices(int startIndex, int targetIndex) throws linkedheap.EmptyCollectionException, EmptyCollectionException {
+        int index;
+        double weight;
+        int[] predecessor = new int[numberVertices];
+        LinkedHeap<Double> traversalMinHeap = new LinkedHeap<Double>();
+        ArrayUnorderedList<Integer> resultList
+                = new ArrayUnorderedList<Integer>();
+        LinkedStack<Integer> stack = new LinkedStack<Integer>();
+
+        int[] pathIndex = new int[numberVertices];
+        double[] pathWeight = new double[numberVertices];
+        for (int i = 0; i < numberVertices; i++) {
+            pathWeight[i] = Double.POSITIVE_INFINITY;
+        }
+
+        boolean[] visited = new boolean[numberVertices];
+        for (int i = 0; i < numberVertices; i++) {
+            visited[i] = false;
+        }
+
+        if (!indexIsValid(startIndex) || !indexIsValid(targetIndex)
+                || (startIndex == targetIndex) || isEmpty()) {
+            return resultList.iterator();
+        }
+
+        pathWeight[startIndex] = 0;
+        predecessor[startIndex] = -1;
+        visited[startIndex] = true;
+        weight = 0;
+
+        /**
+         * Update the pathWeight for each vertex except the startVertex. Notice
+         * that all vertices not adjacent to the startVertex will have a
+         * pathWeight of infinity for now.
+         */
+        for (int i = 0; i < numberVertices; i++) {
+            if (!visited[i]) {
+                pathWeight[i] = pathWeight[startIndex]
+                        + adjMatrixNetwork[startIndex][i];
+                predecessor[i] = startIndex;
+                traversalMinHeap.addElement(pathWeight[i]);
+            }
+        }
+
+        do {
+            weight = (traversalMinHeap.removeMin());
+            traversalMinHeap.removeAllElements();
+            if (weight == Double.POSITIVE_INFINITY) // no possible path
+            {
+                return resultList.iterator();
+            } else {
+                index = getIndexOfAdjVertexWithWeightOf(visited, pathWeight,
+                        weight);
+                visited[index] = true;
+            }
+
+            /**
+             * Update the pathWeight for each vertex that has has not been
+             * visited and is adjacent to the last vertex that was visited.
+             * Also, add each unvisited vertex to the heap.
+             */
+            for (int i = 0; i < numberVertices; i++) {
+                if (!visited[i]) {
+                    if ((adjMatrixNetwork[index][i] < Double.POSITIVE_INFINITY)
+                            && (pathWeight[index] + adjMatrixNetwork[index][i]) < pathWeight[i]) {
+                        pathWeight[i] = pathWeight[index] + adjMatrixNetwork[index][i];
+                        predecessor[i] = index;
+                    }
+                    traversalMinHeap.addElement(pathWeight[i]);
+                }
+            }
+        } while (!traversalMinHeap.isEmpty() && !visited[targetIndex]);
+
+        index = targetIndex;
+        stack.push(index);
+        do {
+            index = predecessor[index];
+            stack.push(index);
+        } while (index != startIndex);
+
+        while (!stack.isEmpty()) {
+            resultList.addToRear((stack.pop()));
+        }
+
+        return resultList.iterator();
+    }
 }
