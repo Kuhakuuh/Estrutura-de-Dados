@@ -27,6 +27,7 @@ public class TrabalhoPartico {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException, Exception {
         CalculateDistance calculate = new CalculateDistance();
@@ -153,7 +154,6 @@ public class TrabalhoPartico {
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo level" + pm.listPlayerPerLevel());
         System.out.println("\nLista de jogadores ordenados de forma crescente pelo numero de portais conquistados" + pm.listPlayerPerConquestPortals());
 
-     
         System.out.println(lm.getMap().toString());
 
         GameManagement gm = new GameManagement(lm.getMap());
@@ -171,6 +171,7 @@ public class TrabalhoPartico {
         System.out.println(lm.getMap().toString());
         ExportManagement export = new ExportManagement(lm, pm, rm, gm);
         export.exportData("src/game.json");
+
     }
 
 }
